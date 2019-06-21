@@ -14,8 +14,11 @@ client.on('ready', () => {
 client.on('message', (msg) => {
     if (msg.content === 'ping') {
         msg.reply('pong');
-    } else if (msg.content === "hello") {
+    } else if (msg.content === "obiwan") {
         msg.channel.send('https://i.imgur.com/YBqg9JG.gifv');
+    }
+    else if (msg.content === "YOU WERE THE CHOSEN ONE") {
+        msg.channel.send('https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif');
     }
 });
 
