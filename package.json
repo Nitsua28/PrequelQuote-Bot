@@ -4,7 +4,7 @@
   "description": "Simple Bot that generates quotes from the Star Wars Prequels",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node dist/bot/bot.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/JeffyLo94/PrequelQuote-Bot/issues"
   },
-  "homepage": "https://github.com/JeffyLo94/PrequelQuote-Bot#readme"
+  "homepage": "https://github.com/JeffyLo94/PrequelQuote-Bot#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "jsonfile": "^5.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.8"
+  }
 }
