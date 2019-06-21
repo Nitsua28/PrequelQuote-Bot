@@ -1,6 +1,6 @@
 # PrequelQuote-Bot v1.0.0
 ## Description:
-Discord Bot to that returns prequel quotes
+Simple Bot that generates quotes from the Star Wars Prequels
 
 ## Dependencies:
 * __node.js__ version 10+
