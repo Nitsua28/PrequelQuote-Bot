@@ -15,8 +15,6 @@ client.on('message', (msg) => {
     if (msg.content === 'ping') {
         msg.reply('pong');
     } else if (msg.content === "hello") {
-        // const attachment = new MessageAttachment();
-        // msg.channel.send(`Hello There ${msg.author}`, attachment);
         msg.channel.send('https://i.imgur.com/YBqg9JG.gifv');
     }
 });
