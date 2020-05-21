@@ -1,4 +1,4 @@
-# PrequelQuote-Bot v1.1.0
+# PrequelQuote-Bot v1.1.1
 ## Description:
 Simple Bot that generates quotes from the Star Wars Prequels
 

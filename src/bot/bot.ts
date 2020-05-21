@@ -2,16 +2,38 @@ import { logger } from '../utils/logger';
 import { fstat } from 'fs';
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const Auth = require('../../bot-auth.json');
+const fuse = require('fuse.js');
 const client = new Client();
 const fs = require('fs'),
     readline = require('readline'),
     instream = fs.createReadStream('quotes.txt'),
     outstream = new (require('stream'))(),
     rl = readline.createInterface(instream, outstream);
+const books = [
+    {
+        title: "Old Man's War",
+        author: {
+        firstName: 'John',
+        lastName: 'Scalzi'
+        }
+    },
+    {
+        title: 'The Lock Artist',
+        author: {
+        firstName: 'Steve',
+        lastName: 'Hamilton'
+        }
+    }
+    ]
+let options = {
+    shouldSort: true,
+    maxPatternLength: 32,
+    minMatchCharLength: 3,
+    };
 //created the map which has key:quote and value:image or gif
 let quotes = new Map();
 //new array to shove the keys in and iterate
-var temp = new Array(30);
+var temp = new Array(30); //update number of quotes
 var count = 0;
 rl.on('line', function (line) {
     var list = String(line).split("+");
@@ -26,11 +48,16 @@ client.on('ready', () => {
 
 client.on('message', (msg) => {
     //gives the user a pm with a list of commands
+    if (msg.content === ("test")) {
+        const saying = new fuse(temp, options)
+        const result = saying.search('Nooo')
+        console.log(result.item)
+    }
     if (msg.content === ("*help")) {
         const Embed = new MessageEmbed()
         .setColor('#0099ff')
 	    .setTitle('Help Commands')
-        .setDescription('This is a work in progress')
+        .setDescription('This is a work in progress. 30 quotes so far.')
         .addFields(
             { name: 'random', value: 'Generates a random quote from the Prequels with an image or GIF.\n' },
             { name: 'good', value: 'Enunciate your approval clearly and slowly\n' },
