@@ -1,6 +1,6 @@
 import { logger } from '../utils/logger';
 import { fstat } from 'fs';
-const { Client, MessageAttachment } = require('discord.js');
+const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const Auth = require('../../bot-auth.json');
 const client = new Client();
 const fs = require('fs'),
@@ -25,24 +25,68 @@ client.on('ready', () => {
 });
 
 client.on('message', (msg) => {
-    if (msg.content === 'execute 66.exe') {
-        msg.channel.send('https://media.giphy.com/media/xTiIzrRyvrFijaEtY4/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/uGiQnHOGRvLpu/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/gr3rGWS6c7pKM/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/T4TCOdAe4OOUU/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/3r7yaG78CicpO/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/v7iNd2YXxb12E/giphy.gif');
-        msg.channel.send('https://media.giphy.com/media/3oKIPzLXQYb2Bn5PLG/giphy.gif');
-    } else if (msg.content === "obiwan") {
-        msg.channel.send('https://i.imgur.com/YBqg9JG.gifv');
+    //gives the user a pm with a list of commands
+    if (msg.content === ("*help")) {
+        const Embed = new MessageEmbed()
+        .setColor('#0099ff')
+	    .setTitle('Help Commands')
+        .setDescription('This is a work in progress')
+        .addFields(
+            { name: 'random', value: 'Generates a random quote from the Prequels with an image or GIF.\n' },
+            { name: 'good', value: 'Enunciate your approval clearly and slowly\n' },
+            { name: 'ihateyou', value: 'Give your master the full force of your disapproval\n' },
+            { name: 'hellothere', value: 'Say Hi to General Grevious\n' },
+            { name: 'execute66', value: 'Kills all the Jedi' },
+            { name: 'killyounglings', value: 'Try out Anakin\'s pastime' },
+        )
+        .setTimestamp();
+
+        msg.author.send(Embed);
+
     }
-    else if (msg.content === "YOU WERE THE CHOSEN ONE") {
-        msg.channel.send('https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif');
+
+    if (msg.content === '*execute66') {
+        msg.channel.send("executing...");
+        const image1 = new MessageAttachment("./images/execute66.gif")
+        const image2 = new MessageAttachment("./images/jedideath1.gif")
+        const image3 = new MessageAttachment("./images/aaylasecura.gif")
+        const image4 = new MessageAttachment("./images/Plo_Koon.gif")
+        const image5 = new MessageAttachment("./images/stass_allie.gif")
+        const image6 = new MessageAttachment("./images/jeditemple.gif")
+        const image7 = new MessageAttachment("./images/killyounglings.gif")
+        const image8 = new MessageAttachment("./images/evillaugh.gif")
+        msg.channel.send(image1);
+        msg.channel.send(image2);
+        msg.channel.send(image3);
+        msg.channel.send(image4);
+        msg.channel.send(image5);
+        msg.channel.send(image6);
+        msg.channel.send(image7);
+        msg.channel.send(image8);
     }
-    else if (msg.content === "quoteme") {
+    if (msg.content === "*hellothere") {
+        const image = new MessageAttachment("./images/hellothere.gif")
+        msg.channel.send(image);
+    }
+    if (msg.content === "*killyounglings") {
+        const image1 = new MessageAttachment("./images/masterskywalker.gif")
+        const image2 = new MessageAttachment("./images/killyounglings2.gif")
+        msg.channel.send(image1);
+        msg.channel.send(image2);
+    }
+    if (msg.content === "*ihateyou") {
+        const image = new MessageAttachment("./images/ihateyou.gif")
+        msg.channel.send(image);
+    }
+    if (msg.content === "*good") {
+        const image = new MessageAttachment("./images/good.gif")
+        msg.channel.send(image);
+        }
+    if (msg.content === "*random") {
         var randomQuote = temp[Math.floor(Math.random()* 30)];
         msg.channel.send(randomQuote);
-        msg.channel.send(quotes.get(randomQuote));
+        const image = new MessageAttachment(quotes.get(randomQuote))
+        msg.channel.send(image);
     }
 });
 

@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/JeffyLo94/PrequelQuote-Bot#readme",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "discord.js": "^12.2.0",
     "jsonfile": "^5.0.0",
     "winston": "^3.2.1"
   },
