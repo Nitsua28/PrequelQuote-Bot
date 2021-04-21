@@ -26,9 +26,10 @@ const books = [
     }
     ]
 let options = {
-    shouldSort: true,
     maxPatternLength: 32,
     minMatchCharLength: 3,
+    threshold: 0.2,
+    includeScore: true,
     };
 //created the map which has key:quote and value:image or gif
 let quotes = new Map();
@@ -47,12 +48,13 @@ client.on('ready', () => {
 });
 
 client.on('message', (msg) => {
-    //gives the user a pm with a list of commands
+    
     if (msg.content === ("test")) {
         const saying = new fuse(temp, options)
-        const result = saying.search('Nooo')
-        console.log(result.item)
+        var result = saying.search('Nooo')
+        msg.channel.send(result.value)
     }
+    //gives the user a pm with a list of commands
     if (msg.content === ("*help")) {
         const Embed = new MessageEmbed()
         .setColor('#0099ff')
@@ -65,6 +67,9 @@ client.on('message', (msg) => {
             { name: 'hellothere', value: 'Say Hi to General Grevious\n' },
             { name: 'execute66', value: 'Kills all the Jedi' },
             { name: 'killyounglings', value: 'Try out Anakin\'s pastime' },
+            { name: 'sand', value: 'course and rough and irritating' },
+            { name: 'blieblilblbib'},
+            
         )
         .setTimestamp();
 
@@ -109,6 +114,14 @@ client.on('message', (msg) => {
         const image = new MessageAttachment("./images/good.gif")
         msg.channel.send(image);
         }
+    if (msg.content === "*sand") {
+        const image = new MessageAttachment("./images/sand.gif");
+        msg.channel.send(image);
+    }
+    if (msg.content === "*blieblilblbib") {
+        const image = new MessageAttachment("./images/blieblilblbib.gif");
+        msg.channel.send(image);
+    }
     if (msg.content === "*random") {
         var randomQuote = temp[Math.floor(Math.random()* 30)];
         msg.channel.send(randomQuote);
