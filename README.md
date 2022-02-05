@@ -6,6 +6,7 @@ Simple Bot that generates quotes from the Star Wars Prequels
 * __node.js__ version 12+
 * __typescript__ easier collab times
 * __npm__ for installation
+s
 
 ## Installation:
 * Install node
