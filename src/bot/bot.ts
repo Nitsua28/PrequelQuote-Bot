@@ -5,14 +5,7 @@ const Auth = require('../../bot-auth.json');
 //const fuse = require('fuse.js');
 const client = new Client();
 
-const mariadb = require('mariadb');
 
-const pool = mariadb.createPool({
-
-  host: process.env.localhost,
-  user: process.env.root,
-  database: "starwarsprequels"
-});
 // const fs = require('fs'),
 //     readline = require('readline'),
 //     instream = fs.createReadStream('quotes.txt'),
@@ -21,26 +14,26 @@ const pool = mariadb.createPool({
 
 
 //discord4j for autocomplete
-async function asyncFunction() {
-  let conn;
-  try {
-
-    conn = await pool.getconnection();
-
-
-  } catch (err) {
-      throw err;
-  } finally {
-      if (conn) conn.release();
-  }
-}
-
-let options = {
-    maxPatternLength: 32,
-    minMatchCharLength: 3,
-    threshold: 0.2,
-    includeScore: true,
-    };
+// async function asyncFunction() {
+//   let conn;
+//   try {
+//
+//     conn = await pool.getconnection();
+//
+//
+//   } catch (err) {
+//       throw err;
+//   } finally {
+//       if (conn) conn.release();
+//   }
+// }
+//
+// let options = {
+//     maxPatternLength: 32,
+//     minMatchCharLength: 3,
+//     threshold: 0.2,
+//     includeScore: true,
+//     };
 //created the map which has key:quote and value:image or gif
 //let quotes = new Map();
 //new array to shove the keys in and iterate
@@ -58,34 +51,23 @@ client.on('ready', () => {
 });
 
 client.on('message', (msg) => {
+    if (msg.content === ("*help")) { //user dm with all commands
+      const Embed = new MessageEmbed()
+        .setColor('#0099ff')
+  	    .setTitle('Help Commands')
+        .setDescription('Welcome to Prequel Quote Generator! Here are our Commands and what they do!')
+        .addFields(
+              { name: '*random', value: 'Generates a random quote from the Prequels\n' },
+              { name: '*(actor)_(movie)', value: "Generate a quote by actor and movie separated by \"_\" replacing \"(actor)\" and \"(movie)\" respectively\n" },
+              { name: '*(actor)', value: "Generate a quote by actor in place of \"(actor)"\n" },
+              { name: '*(movie)', value: "Generate a quote by movie in place of \"(movie)\" \n" },
+              { name: '*help', value: 'Gives you a list of commands\n' },
+          )
+        .setTimestamp();
 
-    // if (msg.content === ("test")) {
-    //     const saying = new fuse(temp, options)
-    //     var result = saying.search('Nooo')
-    //     msg.channel.send(result.value)
-    // }
-    // //gives the user a pm with a list of commands
-    // if (msg.content === ("*help")) {
-    //     const Embed = new MessageEmbed()
-    //     .setColor('#0099ff')
-	  //   .setTitle('Help Commands')
-    //     .setDescription('This is a work in progress. 30 quotes so far.')
-    //     .addFields(
-    //         { name: 'random', value: 'Generates a random quote from the Prequels with an image or GIF.\n' },
-    //         { name: 'good', value: 'Enunciate your approval clearly and slowly\n' },
-    //         { name: 'ihateyou', value: 'Give your master the full force of your disapproval\n' },
-    //         { name: 'hellothere', value: 'Say Hi to General Grevious\n' },
-    //         { name: 'execute66', value: 'Kills all the Jedi' },
-    //         { name: 'killyounglings', value: 'Try out Anakin\'s pastime' },
-    //         { name: 'sand', value: 'course and rough and irritating' },
-    //         { name: 'blieblilblbib'},
-    //
-    //     )
-    //     .setTimestamp();
-    //
-    //     msg.author.send(Embed);
-    //
-    // }
+          msg.author.send(Embed);
+    }
+
     //
     // if (msg.content === '*execute66') {
     //     msg.channel.send("executing...");
