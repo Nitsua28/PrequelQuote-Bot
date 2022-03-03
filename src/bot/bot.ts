@@ -81,7 +81,7 @@ client.on('message', (msg) => {
 
           msg.author.send(Embed);
     }
-
+    if (msg.content === ("*random")) {}
 //     const itemCountParams = {
 //    TableName: "MyTable",
 //    ProjectionExpression: "postId"
