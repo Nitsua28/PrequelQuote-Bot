@@ -45,6 +45,20 @@ const client = new Client();
 //     temp[count] = list[0];
 //     count++;
 // });
+function getRandomInt(min, max) {
+
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const aws = require("aws-sdk");
+
+aws.config.update({
+  accessKeyId: "xxxxxxxx",
+  accessSecretKey: "xxxx",
+  region: "us-west-2",
+});
+const docClient = new aws.DynamoDB.DocumentClient();
+
 client.on('ready', () => {
     logger.debug(`Bot Ready and logged in as ${client.user.tag}!`);
     console.log(`Bot Online`);
@@ -68,58 +82,11 @@ client.on('message', (msg) => {
           msg.author.send(Embed);
     }
 
-    //
-    // if (msg.content === '*execute66') {
-    //     msg.channel.send("executing...");
-    //     const image1 = new MessageAttachment("./images/execute66.gif")
-    //     const image2 = new MessageAttachment("./images/jedideath1.gif")
-    //     const image3 = new MessageAttachment("./images/aaylasecura.gif")
-    //     const image4 = new MessageAttachment("./images/Plo_Koon.gif")
-    //     const image5 = new MessageAttachment("./images/stass_allie.gif")
-    //     const image6 = new MessageAttachment("./images/jeditemple.gif")
-    //     const image7 = new MessageAttachment("./images/killyounglings.gif")
-    //     const image8 = new MessageAttachment("./images/evillaugh.gif")
-    //     msg.channel.send(image1);
-    //     msg.channel.send(image2);
-    //     msg.channel.send(image3);
-    //     msg.channel.send(image4);
-    //     msg.channel.send(image5);
-    //     msg.channel.send(image6);
-    //     msg.channel.send(image7);
-    //     msg.channel.send(image8);
-    // }
-    // if (msg.content === "*hellothere") {
-    //     const image = new MessageAttachment("./images/hellothere.gif")
-    //     msg.channel.send(image);
-    // }
-    // if (msg.content === "*killyounglings") {
-    //     const image1 = new MessageAttachment("./images/masterskywalker.gif")
-    //     const image2 = new MessageAttachment("./images/killyounglings2.gif")
-    //     msg.channel.send(image1);
-    //     msg.channel.send(image2);
-    // }
-    // if (msg.content === "*ihateyou") {
-    //     const image = new MessageAttachment("./images/ihateyou.gif")
-    //     msg.channel.send(image);
-    // }
-    // if (msg.content === "*good") {
-    //     const image = new MessageAttachment("./images/good.gif")
-    //     msg.channel.send(image);
-    //     }
-    // if (msg.content === "*sand") {
-    //     const image = new MessageAttachment("./images/sand.gif");
-    //     msg.channel.send(image);
-    // }
-    // if (msg.content === "*blieblilblbib") {
-    //     const image = new MessageAttachment("./images/blieblilblbib.gif");
-    //     msg.channel.send(image);
-    // }
-    // if (msg.content === "*random") {
-    //     var randomQuote = temp[Math.floor(Math.random()* 30)];
-    //     msg.channel.send(randomQuote);
-    //     //const image = new MessageAttachment(quotes.get(randomQuote))
-    //     //msg.channel.send(image);
-    // }
+//     const itemCountParams = {
+//    TableName: "MyTable",
+//    ProjectionExpression: "postId"
+// };
+//let randomPostId = Items[randomItemNumber].postId;
 });
 
 client.login(Auth.discord.token);
