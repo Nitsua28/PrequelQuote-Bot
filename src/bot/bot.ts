@@ -5,7 +5,7 @@ const Auth = require('../../bot-auth.json');
 //const fuse = require('fuse.js');
 const client = new Client();
 
-
+const TOTAL_NUMBER_OF_QUOTES = 685
 // const fs = require('fs'),
 //     readline = require('readline'),
 //     instream = fs.createReadStream('quotes.txt'),
@@ -73,15 +73,18 @@ client.on('message', (msg) => {
         .addFields(
               { name: '*random', value: 'Generates a random quote from the Prequels\n' },
               { name: '*(actor)_(movie)', value: "Generate a quote by actor and movie separated by \"_\" replacing \"(actor)\" and \"(movie)\" respectively\n" },
-              { name: '*(actor)', value: "Generate a quote by actor in place of \"(actor)"\n" },
+              { name: '*(actor)', value: "Generate a quote by actor in place of \"(actor)\"\n" },
               { name: '*(movie)', value: "Generate a quote by movie in place of \"(movie)\" \n" },
               { name: '*help', value: 'Gives you a list of commands\n' },
           )
         .setTimestamp();
 
-          msg.author.send(Embed);
+      msg.author.send(Embed);
     }
-    if (msg.content === ("*random")) {}
+    if (msg.content === ("*random")) {
+      let randomID = getRandomInt(1,TOTAL_NUMBER_OF_QUOTES);
+      msg.channel.send(randomID);
+    }
 //     const itemCountParams = {
 //    TableName: "MyTable",
 //    ProjectionExpression: "postId"
