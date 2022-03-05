@@ -53,8 +53,8 @@ function getRandomInt(min, max) {
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: "xxxxxxxx",
-  accessSecretKey: "xxxx",
+  accessKeyId: "",
+  accessSecretKey: "",
   region: "us-west-2",
 });
 const docClient = new aws.DynamoDB.DocumentClient();
@@ -83,8 +83,31 @@ client.on('message', (msg) => {
     }
     if (msg.content === ("*random")) {
       let randomID = getRandomInt(1,TOTAL_NUMBER_OF_QUOTES);
-      msg.channel.send(randomID);
-    }
+
+      var params = {
+          TableName : "PrequelQuotes",
+          KeyConditionExpression: "#id = :id",
+          ExpressionAttributeNames:{
+              "#id": "ID"
+          },
+          ExpressionAttributeValues: {
+              ":id": randomID.toString()
+          }
+      };
+
+      docClient.query(params, function(err, data) {
+          if (err) {
+              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+          } else {
+              console.log("Query succeeded.");
+              data.Items.forEach(function(item) {
+                  console.log(" -", item.Actor + ": " + item.Quote);
+                  msg.channel.send(item.Actor+ ":" + item.Movie + ":" + item.Quote);
+              });
+          }
+      });
+
+      }
 //     const itemCountParams = {
 //    TableName: "MyTable",
 //    ProjectionExpression: "postId"
