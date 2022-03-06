@@ -6,8 +6,8 @@ const client = new Client();
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: "AKIA2YVQ44FPAE3SAN77",
-  accessSecretKey: "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",
+  accessKeyId: "",
+  accessSecretKey: "",
   region: "us-west-2",
 });
 const docClient = new aws.DynamoDB.DocumentClient();
