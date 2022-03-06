@@ -2,54 +2,7 @@ import { logger } from '../utils/logger';
 import { fstat } from 'fs';
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const Auth = require('../../bot-auth.json');
-//const fuse = require('fuse.js');
 const client = new Client();
-
-const TOTAL_NUMBER_OF_QUOTES = 685
-// const fs = require('fs'),
-//     readline = require('readline'),
-//     instream = fs.createReadStream('quotes.txt'),
-//     outstream = new (require('stream'))(),
-//     rl = readline.createInterface(instream, outstream);
-
-
-//discord4j for autocomplete
-// async function asyncFunction() {
-//   let conn;
-//   try {
-//
-//     conn = await pool.getconnection();
-//
-//
-//   } catch (err) {
-//       throw err;
-//   } finally {
-//       if (conn) conn.release();
-//   }
-// }
-//
-// let options = {
-//     maxPatternLength: 32,
-//     minMatchCharLength: 3,
-//     threshold: 0.2,
-//     includeScore: true,
-//     };
-//created the map which has key:quote and value:image or gif
-//let quotes = new Map();
-//new array to shove the keys in and iterate
-// var temp = new Array(30); //update number of quotes
-// var count = 0;
-// rl.on('line', function (line) {
-//     var list = String(line).split("+");
-//     quotes.set(list[0],list[1]);
-//     temp[count] = list[0];
-//     count++;
-// });
-function getRandomInt(min, max) {
-
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const aws = require("aws-sdk");
 
 aws.config.update({
@@ -59,28 +12,38 @@ aws.config.update({
 });
 const docClient = new aws.DynamoDB.DocumentClient();
 
+const TOTAL_NUMBER_OF_QUOTES = 685
+
+const helpEmbed = new MessageEmbed()
+  .setColor('#0099ff')
+  .setTitle('Help Commands')
+  .setDescription('Welcome to Prequel Quote Generator! Here are our Commands and what they do!')
+  .addFields(
+        { name: '*random', value: 'Generates a random quote from the Prequels\n' },
+        { name: '*(actor)_(movie)', value: "Generate a quote by actor and movie separated by \"_\" replacing \"(actor)\" and \"(movie)\" respectively\n" },
+        { name: '*(actor)', value: "Generate a quote by actor in place of \"(actor)\"\n" },
+        { name: '*(movie)', value: "Generate a quote by movie in place of \"(movie)\" \n" },
+        { name: '*help', value: 'Gives you a list of commands\n' },
+    )
+  .setTimestamp();
+
+const quoteEmbed = new MessageEmbed()
+  .setColor('#0099ff')
+
+const movies: string[] = ["All Movies",
+                          "Star Wars: Episode I - The Phantom Menace",
+                          "Star Wars: Episode II - Attack of the Clones",
+                          "Star Wars: Episode III - Revenge of the Sith"
+]
+
+function getRandomInt(min, max) {return Math.floor(Math.random() * (max - min + 1)) + min;}
+
 client.on('ready', () => {
     logger.debug(`Bot Ready and logged in as ${client.user.tag}!`);
     console.log(`Bot Online`);
 });
-
 client.on('message', (msg) => {
-    if (msg.content === ("*help")) { //user dm with all commands
-      const Embed = new MessageEmbed()
-        .setColor('#0099ff')
-  	    .setTitle('Help Commands')
-        .setDescription('Welcome to Prequel Quote Generator! Here are our Commands and what they do!')
-        .addFields(
-              { name: '*random', value: 'Generates a random quote from the Prequels\n' },
-              { name: '*(actor)_(movie)', value: "Generate a quote by actor and movie separated by \"_\" replacing \"(actor)\" and \"(movie)\" respectively\n" },
-              { name: '*(actor)', value: "Generate a quote by actor in place of \"(actor)\"\n" },
-              { name: '*(movie)', value: "Generate a quote by movie in place of \"(movie)\" \n" },
-              { name: '*help', value: 'Gives you a list of commands\n' },
-          )
-        .setTimestamp();
-
-      msg.author.send(Embed);
-    }
+    if (msg.content === ("*help")) msg.author.send(helpEmbed);
     if (msg.content === ("*random")) {
       let randomID = getRandomInt(1,TOTAL_NUMBER_OF_QUOTES);
 
@@ -101,8 +64,18 @@ client.on('message', (msg) => {
           } else {
               console.log("Query succeeded.");
               data.Items.forEach(function(item) {
-                  console.log(" -", item.Actor + ": " + item.Quote);
-                  msg.channel.send(item.Actor+ ":" + item.Movie + ":" + item.Quote);
+
+                  // msg.channel.send(item.Actor+ ":" + item.Movie + ":" + item.Quote);
+                  let file = new MessageAttachment('./images/ani_henngg.jpg')
+                  quoteEmbed
+                  .setAuthor(movies[parseInt(item.Movie)])//Actor
+                  .setTitle(item.Actor)//Movie
+                  .setDescription(item.Quote)//Quote
+                  .setThumbnail("https://upload.wikimedia.org/wikipedia/en/b/bf/Mace_Windu.png")//Actor picture
+                  .setImage("https://media.giphy.com/media/hb9bAzezYiiRi/giphy.gif")//gif scene
+                  .setTimestamp();
+
+                  msg.channel.send(quoteEmbed)
               });
           }
       });
