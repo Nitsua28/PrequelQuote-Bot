@@ -6,8 +6,8 @@ const client = new Client();
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: "",
-  accessSecretKey: "",
+  accessKeyId: "AKIA2YVQ44FPAE3SAN77",
+  accessSecretKey: "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",
   region: "us-west-2",
 });
 const docClient = new aws.DynamoDB.DocumentClient();
@@ -30,11 +30,8 @@ const helpEmbed = new MessageEmbed()
 const quoteEmbed = new MessageEmbed()
   .setColor('#0099ff')
 
-const movies: string[] = ["All Movies",
-                          "Star Wars: Episode I - The Phantom Menace",
-                          "Star Wars: Episode II - Attack of the Clones",
-                          "Star Wars: Episode III - Revenge of the Sith"
-]
+
+const dataDoc = require("../../quoteData.js")
 
 function getRandomInt(min, max) {return Math.floor(Math.random() * (max - min + 1)) + min;}
 
@@ -43,6 +40,7 @@ client.on('ready', () => {
     console.log(`Bot Online`);
 });
 client.on('message', (msg) => {
+    if (msg.content === ("test")) console.log(dataDoc.actors);
     if (msg.content === ("*help")) msg.author.send(helpEmbed);
     if (msg.content === ("*random")) {
       let randomID = getRandomInt(1,TOTAL_NUMBER_OF_QUOTES);
@@ -68,7 +66,7 @@ client.on('message', (msg) => {
                   // msg.channel.send(item.Actor+ ":" + item.Movie + ":" + item.Quote);
                   let file = new MessageAttachment('./images/ani_henngg.jpg')
                   quoteEmbed
-                  .setAuthor(movies[parseInt(item.Movie)])//Actor
+                  .setAuthor(dataDoc.movies[parseInt(item.Movie)])//Actor
                   .setTitle(item.Actor)//Movie
                   .setDescription(item.Quote)//Quote
                   .setThumbnail("https://upload.wikimedia.org/wikipedia/en/b/bf/Mace_Windu.png")//Actor picture
