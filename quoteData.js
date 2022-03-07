@@ -1,4 +1,14 @@
-const rengar = ["aksdnaklsf"];
+const TOTAL_NUMBER_OF_QUOTES = 690;
+const LAST_ID_OF_FIRST_MOVIE = 281;
+const LAST_ID_OF_SECOND_MOVIE = 429;
+const LAST_ID_OF_THIRD_MOVIE = 690;
+
+const movies =[
+              "Found in all the Movies",
+              "Star Wars: Episode I – The Phantom Menace (1999)",
+              "Star Wars: Episode II – Attack of the Clones (2002)",
+              "Star Wars: Episode III – Revenge of the Sith (2005)"
+]
 const actors = ['Palpatine',
   'Gregar Typho',
   'Watto',
@@ -47,4 +57,12 @@ const actors = ['Palpatine',
   'Roos Tarpals',
   'Wald',
   'Finus Valorum'];
-module.exports = {rengar, actors}
+  
+module.exports = {
+                  movies,
+                  actors,
+                  TOTAL_NUMBER_OF_QUOTES,
+                  LAST_ID_OF_FIRST_MOVIE,
+                  LAST_ID_OF_SECOND_MOVIE,
+                  LAST_ID_OF_THIRD_MOVIE
+                }

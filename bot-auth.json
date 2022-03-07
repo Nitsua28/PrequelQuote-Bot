@@ -1,5 +1,10 @@
 {
     "discord": {
         "token": ""
+    },
+    "aws": {
+      "accessKeyId": "",
+      "accessSecretKey": "",
+      "region" : "us-west-2"
     }
 }
