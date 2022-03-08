@@ -1,5 +1,14 @@
 {
     "discord": {
-        "token": "<bot-token>"
+        "token": "",
+        "ClientID": ""
+    },
+    "aws": {
+      "accessKeyId": "",
+      "accessSecretKey": "",
+      "region" : "us-west-2"
+    },
+    "guild": {
+      "guildID": ""
     }
 }
