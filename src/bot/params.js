@@ -11,9 +11,9 @@ var paramsQuery = {
 
 var paramsScan = {
     TableName: "PrequelQuotes",
-    ProjectionExpression: "ID",
+    ProjectionExpression: "#id",
     ExpressionAttributeNames:{
-
+      "#id": "ID"
     },
     ExpressionAttributeValues:{
 
