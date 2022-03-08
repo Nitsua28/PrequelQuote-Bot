@@ -123,6 +123,8 @@ client.on('interactionCreate', async (interaction) => {
 
           } else {
               console.log("Scan succeeded.");
+              console.log(data.Count);
+              console.log(data.scannedCount);
               let randNum = getRandomInt(0,data.Count - 1);
               console.log(data.Items)
               let randomID = data.Items[randNum]["ID"]
