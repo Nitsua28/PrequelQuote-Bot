@@ -1,14 +1,14 @@
 {
     "discord": {
-        "token": "",
-        "ClientID": ""
+        "token": "NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.PBSycghHBCT2FtngA7XVtZBbcSg",
+        "ClientID": "591501223174209546"
     },
     "aws": {
-      "accessKeyId": "",
-      "accessSecretKey": "",
+      "accessKeyId": "AKIA2YVQ44FPJBVWR2LA",
+      "accessSecretKey": "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",
       "region" : "us-west-2"
     },
     "guild": {
-      "guildID": ""
+      "guildID": "713081674606444675"
     }
 }

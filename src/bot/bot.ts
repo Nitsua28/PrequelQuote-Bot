@@ -64,7 +64,7 @@ client.on('interactionCreate', async (interaction) => {
                   .setAuthor({name: dataDoc.movies[parseInt(item.Movie)]})//Actor
                   .setTitle(item.Actor)//Movie
                   .setDescription(item.Quote)//Quote
-                  .setThumbnail("https://upload.wikimedia.org/wikipedia/en/b/bf/Mace_Windu.png")//Actor picture
+                  .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
                   .setImage("https://media.giphy.com/media/hb9bAzezYiiRi/giphy.gif")//gif scene
                   .setTimestamp();
               });
@@ -136,12 +136,11 @@ client.on('interactionCreate', async (interaction) => {
                   } else {
                       console.log("Query succeeded.");
                       data.Items.forEach(function(item) {
-
                           embeds.quoteEmbed
                           .setAuthor({name: dataDoc.movies[parseInt(item.Movie)]})//Actor
                           .setTitle(item.Actor)//Movie
                           .setDescription(item.Quote)//Quote
-                          .setThumbnail("https://upload.wikimedia.org/wikipedia/en/b/bf/Mace_Windu.png")//Actor picture
+                          .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
                           .setImage("https://media.giphy.com/media/hb9bAzezYiiRi/giphy.gif")//gif scene
                           .setTimestamp();
 
