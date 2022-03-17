@@ -7,8 +7,5 @@
       "accessKeyId": "",
       "accessSecretKey": "",
       "region" : ""
-    },
-    "guild": {
-      "guildID": ""
     }
 }

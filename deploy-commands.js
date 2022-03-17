@@ -28,6 +28,6 @@ const commands = [
 
 const rest = new REST({ version: '9' }).setToken(Auth.discord.token);
 
-rest.put(Routes.applicationGuildCommands(Auth.discord.ClientID, Auth.guild.guildID), { body: commands })
+rest.put(Routes.applicationCommands(Auth.discord.ClientID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
