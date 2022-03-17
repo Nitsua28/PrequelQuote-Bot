@@ -121,12 +121,18 @@ const actorPictures = new Map([
 'https://1.bp.blogspot.com/-yFrQTMk43Hs/XVA6dYdrhyI/AAAAAAAA8cQ/K1pAngE5vy0acMPQ8r4n0ghib6ciRh77wCLcBGAs/s1600/sebulba%2Bstar%2Bwars%2Bepisode%2Bone.jpg'],
 ['Jabba the Hutt',
 'https://lumiere-a.akamaihd.net/v1/images/Jabba-The-Hutt_b5a08a70.jpeg?region=0%2C0%2C1200%2C675&width=768'],
-['Poggle the Lesser','https://i.pinimg.com/736x/cd/51/20/cd5120a0a89f33bf2c2f54dcb8944c02.jpg'],
-['Kitster','https://static.wikia.nocookie.net/starwars/images/a/a1/Kitster.png/revision/latest?cb=20180121195932'],
-['Cliegg Lars','https://lumiere-a.akamaihd.net/v1/images/databank_cliegglars_01_169_c2f0b9cb.jpeg?region=0%2C0%2C1560%2C878&width=768'],
-['Roos Tarpals','https://static.wikia.nocookie.net/starwars/images/d/d5/TarpalsHS-SWE.png/revision/latest?cb=20211214030207'],
-['Wald','https://static.wikia.nocookie.net/starwars/images/b/bd/WaldFull-SWE.png/revision/latest?cb=20160914024029'],
-['Finus Valorum','https://i.pinimg.com/originals/29/16/62/29166227119bf6376119c9d89c3d88c7.jpg']
+['Poggle the Lesser',
+'https://i.pinimg.com/736x/cd/51/20/cd5120a0a89f33bf2c2f54dcb8944c02.jpg'],
+['Kitster',
+'https://static.wikia.nocookie.net/starwars/images/a/a1/Kitster.png/revision/latest?cb=20180121195932'],
+['Cliegg Lars',
+'https://lumiere-a.akamaihd.net/v1/images/databank_cliegglars_01_169_c2f0b9cb.jpeg?region=0%2C0%2C1560%2C878&width=768'],
+['Roos Tarpals',
+'https://static.wikia.nocookie.net/starwars/images/d/d5/TarpalsHS-SWE.png/revision/latest?cb=20211214030207'],
+['Wald',
+'https://static.wikia.nocookie.net/starwars/images/b/bd/WaldFull-SWE.png/revision/latest?cb=20160914024029'],
+['Finus Valorum',
+'https://i.pinimg.com/originals/29/16/62/29166227119bf6376119c9d89c3d88c7.jpg']
 ]);
 
 module.exports = {

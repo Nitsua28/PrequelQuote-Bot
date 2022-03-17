@@ -6,7 +6,7 @@
     "aws": {
       "accessKeyId": "",
       "accessSecretKey": "",
-      "region" : "us-west-2"
+      "region" : ""
     },
     "guild": {
       "guildID": ""
