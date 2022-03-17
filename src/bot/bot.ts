@@ -2,9 +2,9 @@ import { logger } from '../utils/logger';
 import { fstat } from 'fs';
 const {Client,Intents}= require('discord.js');
 const Auth = require('../../bot-auth.json');
-const dataDoc = require("../../quoteData.js");
-const embeds = require("./embeds.js");
-const params = require("./params.js");
+const dataDoc = require("../../QuoteData.js");
+const embeds = require("./Embeds.js");
+const params = require("./Params.js");
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
