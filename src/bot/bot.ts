@@ -19,8 +19,8 @@ function getMovie(interaction){
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: process.env.AWS_ACCESS_ID,
-  accessSecretKey: process.env.AWS_ACCESS_SECRETKEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_ACCESS_REGION,
 });
 
