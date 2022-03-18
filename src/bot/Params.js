@@ -9,17 +9,17 @@ var paramsQuery = {
     }
 };
 
-var paramsScan = {
-    TableName: "PrequelQuotes",
-    ProjectionExpression: "#id",
-    ExpressionAttributeNames:{
-      "#id": "ID"
-    },
-    ExpressionAttributeValues:{
+// var paramsScan = {
+//     TableName: "PrequelQuotes",
+//     ProjectionExpression: "#id",
+//     ExpressionAttributeNames:{
+//       "#id": "ID"
+//     },
+//     ExpressionAttributeValues:{
+//
+//     }
+//
+//
+// };
 
-    }
-
-
-};
-
-module.exports = {paramsScan,paramsQuery};
+module.exports = {paramsQuery};

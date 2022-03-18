@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const Auth = require('./bot-auth.json');
 const dataDoc = require("./quoteData.js");
 
 const commands = [
