@@ -130,14 +130,17 @@ client.on('interactionCreate', async (interaction) => {
 
           if (err || data.Count == 0) {
               console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-              if (data.Count == 0) interaction.reply({content: "No quote was found...."});
+              if (data.Count == 0) {
+                interaction.reply({content: "No quote was found...."});
+                console.log("No Quote Found. ERROR.")
+              }
 
           } else {
               console.log("Scan succeeded.");
               // console.log(data.Count);
               // console.log(data.scannedCount);
               let randNum = getRandomInt(0,data.Count - 1);
-              console.log(data.Items)
+              // console.log(data.Items)
               let randomID = data.Items[randNum]["ID"]
               params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
 
