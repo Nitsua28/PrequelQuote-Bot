@@ -1,7 +1,6 @@
 import { logger } from '../utils/logger';
 import { fstat } from 'fs';
 const {Client,Intents}= require('discord.js');
-const Auth = require('../../bot-auth.json');
 const dataDoc = require("../../QuoteData.js");
 const embeds = require("./Embeds.js");
 const params = require("./Params.js");
@@ -20,9 +19,9 @@ function getMovie(interaction){
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: Auth.aws.accessKeyId,
-  accessSecretKey: Auth.aws.accessSecretKey,
-  region: Auth.aws.region,
+  accessKeyId: process.env.AWS_ACCESS_ID,
+  accessSecretKey: process.env.AWS_ACCESS_SECRETKEY,
+  region: process.env.AWS_ACCESS_REGION,
 });
 
 const client = new Client({
@@ -173,4 +172,4 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 
-client.login(Auth.discord.token);
+client.login(process.env.DISCORD_BOT_TOKEN);

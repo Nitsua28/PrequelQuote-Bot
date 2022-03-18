@@ -26,8 +26,8 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken(Auth.discord.token);
+const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
-rest.put(Routes.applicationCommands(Auth.discord.ClientID), { body: commands })
+rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_CLIENTID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
