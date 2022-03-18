@@ -43,7 +43,7 @@ client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()){return}
 
   const {commandName, options} = interaction;
-  console.log(options)
+  //console.log(options)
   if (commandName === "random"){
     var movie = getMovie(interaction);
     var actor = getActor(interaction);
