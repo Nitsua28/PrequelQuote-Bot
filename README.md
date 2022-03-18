@@ -20,6 +20,5 @@ s
 * Soon to be posted
 
 ### Demo
+<img src="https://media.giphy.com/media/84gFEejIZGso9K4BhC/giphy.gif" width="850" height="479"/>
 
----![](https://media.giphy.com/media/IGUvX1BXtXGPWtCVSs/giphy.gif)
----
