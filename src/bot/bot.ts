@@ -123,8 +123,8 @@ client.on('interactionCreate', async (interaction) => {
         filterExpression += "#id between :startID and :endID";
       }
       paramsScan["FilterExpression"] = filterExpression;
-      console.log(filterExpression)
-      console.log(paramsScan)
+      // console.log(filterExpression)
+      // console.log(paramsScan)
 
       docClient.scan(paramsScan, function(err, data) {
 
@@ -134,8 +134,8 @@ client.on('interactionCreate', async (interaction) => {
 
           } else {
               console.log("Scan succeeded.");
-              console.log(data.Count);
-              console.log(data.scannedCount);
+              // console.log(data.Count);
+              // console.log(data.scannedCount);
               let randNum = getRandomInt(0,data.Count - 1);
               console.log(data.Items)
               let randomID = data.Items[randNum]["ID"]
