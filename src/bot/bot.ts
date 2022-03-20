@@ -22,6 +22,7 @@ aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_ACCESS_REGION,
+  
 });
 
 const client = new Client({
