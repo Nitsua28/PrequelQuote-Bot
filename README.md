@@ -1,19 +1,24 @@
-# PrequelQuote-Bot v1.1.1
+# PrequelQuote-Bot v1.2 Alpha
 ## Description:
-Simple Bot that generates quotes from the Star Wars Prequels
+Simple Node.js Bot that generates quotes from the Star Wars Prequels from a AWS database of 690 quotes along with complementary GIFs.
 
 ## Dependencies:
 * __node.js__ version 12+
-* __typescript__ easier collab times
+* __typescript__ version 4
 * __npm__ for installation
+* __discord.js__ version 13+
+* __@discordjs/builders__
+* __@discordjs/rest__
+* __discord-api-types__
+* __jsonfile__ version 5
+* __aws-sdk__ version 2
+* __uuid__ version 8
+* __winston__ version 3
 s
 
-## Installation:
-* Install node
-* For windows run ```npm install --global --production windows-build-tools```
-    * typescript run ```npm install -g typescript```
-    * dependencies run ```npm install```
-
 ## Getting Started:
-* modify ```bot-auth.json``` and replace ```<bot-token>``` with your bot token from Discord
-* To run bot: ```npm start```
+* Soon to be posted
+
+### Demo
+<img src="https://media.giphy.com/media/84gFEejIZGso9K4BhC/giphy.gif" width="850" height="479"/>
+
