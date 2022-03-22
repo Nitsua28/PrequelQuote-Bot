@@ -25,8 +25,8 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.jilga5KPeCoywYV0vlgTT2ry5c0");
+const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
-rest.put(Routes.applicationCommands("591501223174209546"), { body: commands })
+rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_CLIENTID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);
