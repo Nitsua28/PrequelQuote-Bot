@@ -9,7 +9,7 @@ const movies =[
               "Star Wars: Episode II – Attack of the Clones (2002)",
               "Star Wars: Episode III – Revenge of the Sith (2005)"
 ]
-const actors = [
+const characters = [
 ['Sheev Palpatine','Palpatine'], //array of Actor choices //left being choices that appear
 ['Watto','Watto'],
 ['Anakin Skywalker','Anakin Skywalker'],
@@ -137,7 +137,7 @@ const actorPictures = new Map([
 
 module.exports = {
                   movies,
-                  actors,
+                  characters,
                   actorPictures,
                   TOTAL_NUMBER_OF_QUOTES,
                   LAST_ID_OF_FIRST_MOVIE,

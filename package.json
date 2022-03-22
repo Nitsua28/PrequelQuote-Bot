@@ -1,6 +1,6 @@
 {
   "name": "prequelquote-bot",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "Simple Bot that generates quotes from the Star Wars Prequels",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JeffyLo94/PrequelQuote-Bot.git"
+    "url": "git+https://github.com/Nitsua28/PrequelQuote-Bot"
   },
   "keywords": [
     "discord",
@@ -19,9 +19,9 @@
   "author": "Jeffrey Lo and Austin Chan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JeffyLo94/PrequelQuote-Bot/issues"
+    "url": "https://github.com/Nitsua28/PrequelQuote-Bot/issues"
   },
-  "homepage": "https://github.com/JeffyLo94/PrequelQuote-Bot#readme",
+  "homepage": "https://github.com/Nitsua28/PrequelQuote-Bot/readme",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",

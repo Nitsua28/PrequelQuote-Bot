@@ -1,17 +1,17 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const dataDoc = require("./quoteData.js");
+const dataDoc = require("./QuoteData.js");
 
 const commands = [
 	new SlashCommandBuilder() // /random
   .setName('random')
   .setDescription('Generate a Random Quote from the Star Wars Prequels!')
   .addStringOption(option =>
-                    option.setName('actor')
-                          .setDescription('A Random Quote by Actor')
+                    option.setName('character')
+                          .setDescription('A Random Quote by Character')
                           .setRequired(false)
-                          .setChoices(dataDoc.actors)
+                          .setChoices(dataDoc.characters)
                   )
   .addStringOption(option =>
                     option.setName('movie')
@@ -25,8 +25,8 @@ const commands = [
 ]
 	.map(command => command.toJSON());
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_TOKEN);
+const rest = new REST({ version: '9' }).setToken("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.jilga5KPeCoywYV0vlgTT2ry5c0");
 
-rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_CLIENTID), { body: commands })
+rest.put(Routes.applicationCommands("591501223174209546"), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error);

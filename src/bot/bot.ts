@@ -9,8 +9,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getActor(interaction){
-  return interaction.options.getString("actor");
+function getCharacter(interaction){
+  return interaction.options.getString("character");
 }
 
 function getMovie(interaction){
@@ -19,10 +19,10 @@ function getMovie(interaction){
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_ACCESS_REGION,
-  
+  accessKeyId: "AKIA2YVQ44FPDEPFQLL7",//process.env.AWS_ACCESS_KEY_ID,
+  accessSecretKey: "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",//process.env.AWS_SECRET_ACCESS_KEY,
+  region: "us-west-2",//process.env.AWS_ACCESS_REGION,
+
 });
 
 const client = new Client({
@@ -47,7 +47,7 @@ client.on('interactionCreate', async (interaction) => {
   //console.log(options)
   if (commandName === "random"){
     var movie = getMovie(interaction);
-    var actor = getActor(interaction);
+    var actor = getCharacter(interaction);
 
     if ((movie == null) && (actor == null)){ // if only random
       let randomID = getRandomInt(1,dataDoc.TOTAL_NUMBER_OF_QUOTES);
@@ -176,4 +176,4 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.jilga5KPeCoywYV0vlgTT2ry5c0");//process.env.DISCORD_BOT_TOKEN);

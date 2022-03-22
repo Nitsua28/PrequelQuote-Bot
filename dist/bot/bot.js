@@ -11,24 +11,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("../utils/logger");
 const { Client, Intents } = require('discord.js');
-const Auth = require('../../bot-auth.json');
 const dataDoc = require("../../QuoteData.js");
 const embeds = require("./Embeds.js");
 const params = require("./Params.js");
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function getActor(interaction) {
-    return interaction.options.getString("actor");
+function getCharacter(interaction) {
+    return interaction.options.getString("character");
 }
 function getMovie(interaction) {
     return interaction.options.getString("movie");
 }
 const aws = require("aws-sdk");
 aws.config.update({
-    accessKeyId: Auth.aws.accessKeyId,
-    accessSecretKey: Auth.aws.accessSecretKey,
-    region: Auth.aws.region,
+    accessKeyId: "AKIA2YVQ44FPDEPFQLL7",
+    accessSecretKey: "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",
+    region: "us-west-2", //process.env.AWS_ACCESS_REGION,
 });
 const client = new Client({
     intents: [
@@ -45,10 +44,10 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         return;
     }
     const { commandName, options } = interaction;
-    console.log(options);
+    //console.log(options)
     if (commandName === "random") {
         var movie = getMovie(interaction);
-        var actor = getActor(interaction);
+        var actor = getCharacter(interaction);
         if ((movie == null) && (actor == null)) { // if only random
             let randomID = getRandomInt(1, dataDoc.TOTAL_NUMBER_OF_QUOTES);
             params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
@@ -118,20 +117,22 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
                 filterExpression += "#id between :startID and :endID";
             }
             paramsScan["FilterExpression"] = filterExpression;
-            console.log(filterExpression);
-            console.log(paramsScan);
+            // console.log(filterExpression)
+            // console.log(paramsScan)
             docClient.scan(paramsScan, function (err, data) {
                 if (err || data.Count == 0) {
                     console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-                    if (data.Count == 0)
+                    if (data.Count == 0) {
                         interaction.reply({ content: "No quote was found...." });
+                        console.log("No Quote Found. ERROR.");
+                    }
                 }
                 else {
                     console.log("Scan succeeded.");
-                    console.log(data.Count);
-                    console.log(data.scannedCount);
+                    // console.log(data.Count);
+                    // console.log(data.scannedCount);
                     let randNum = getRandomInt(0, data.Count - 1);
-                    console.log(data.Items);
+                    // console.log(data.Items)
                     let randomID = data.Items[randNum]["ID"];
                     params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
                     docClient.query(params.paramsQuery, function (err, data) {
@@ -160,5 +161,5 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         }
     }
 }));
-client.login(Auth.discord.token);
+client.login("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.jilga5KPeCoywYV0vlgTT2ry5c0"); //process.env.DISCORD_BOT_TOKEN);
 //# sourceMappingURL=bot.js.map
