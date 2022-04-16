@@ -49,7 +49,7 @@ client.on('interactionCreate', async (interaction) => {
     var movie = getMovie(interaction);
     var actor = getCharacter(interaction);
 
-    if ((movie == null) && (actor == null)){ // if only random
+    if ((movie == null) && (actor == null)){ // if only random no params
       let randomID = getRandomInt(1,dataDoc.TOTAL_NUMBER_OF_QUOTES);
       params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
       docClient.query(params.paramsQuery, function(err, data) {
@@ -95,33 +95,36 @@ client.on('interactionCreate', async (interaction) => {
       }
 
       if (!(movie == null)){ // if movie
-        var startID;
-        var endID;
-        switch(movie) {
-          case "0":
-            startID = 1;
-            endID = 1;
-            break;
-          case "1":
-            startID = 2
-            endID = dataDoc.LAST_ID_OF_FIRST_MOVIE;
-            break;
-          case "2":
-            startID = dataDoc.LAST_ID_OF_FIRST_MOVIE + 1;
-            endID = dataDoc.LAST_ID_OF_SECOND_MOVIE;
-            break;
-          case "3":
-            startID = dataDoc.LAST_ID_OF_SECOND_MOVIE + 1;
-            endID = dataDoc.LAST_ID_OF_THIRD_MOVIE;
-            break;
-        }
+        // var startID;
+        // var endID;
+        // switch(movie) {
+        //   case "0":
+        //     startID = 1;
+        //     endID = 1;
+        //     break;
+        //   case "1":
+        //     startID = 2
+        //     endID = dataDoc.LAST_ID_OF_FIRST_MOVIE;
+        //     break;
+        //   case "2":
+        //     startID = dataDoc.LAST_ID_OF_FIRST_MOVIE + 1;
+        //     endID = dataDoc.LAST_ID_OF_SECOND_MOVIE;
+        //     break;
+        //   case "3":
+        //     startID = dataDoc.LAST_ID_OF_SECOND_MOVIE + 1;
+        //     endID = dataDoc.LAST_ID_OF_THIRD_MOVIE;
+        //     break;
+        // }
 
-        paramsScan["ExpressionAttributeValues"][":startID"] = startID.toString();
-        paramsScan["ExpressionAttributeValues"][":endID"] = endID.toString();
+        // paramsScan["ExpressionAttributeValues"][":startID"] = startID.toString();
+        // paramsScan["ExpressionAttributeValues"][":endID"] = endID.toString();
+
+        paramsScan["ExpressionAttributeNames"]["#m"] = "Movie";
+        paramsScan["ExpressionAttributeValues"][":movie"] = movie;
         if (!(actor == null)){
           filterExpression += " AND "
         }
-        filterExpression += "#id between :startID and :endID";
+        filterExpression += "#m = :movie";
       }
       paramsScan["FilterExpression"] = filterExpression;
       // console.log(filterExpression)

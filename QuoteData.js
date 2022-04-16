@@ -1,7 +1,7 @@
 const TOTAL_NUMBER_OF_QUOTES = 690;
-const LAST_ID_OF_FIRST_MOVIE = 281;
-const LAST_ID_OF_SECOND_MOVIE = 429;
-const LAST_ID_OF_THIRD_MOVIE = 690;
+// const LAST_ID_OF_FIRST_MOVIE = 281;
+// const LAST_ID_OF_SECOND_MOVIE = 429;
+// const LAST_ID_OF_THIRD_MOVIE = 690;
 
 const movies =[
               "Found in all the Movies",
@@ -139,8 +139,9 @@ module.exports = {
                   movies,
                   characters,
                   actorPictures,
-                  TOTAL_NUMBER_OF_QUOTES,
-                  LAST_ID_OF_FIRST_MOVIE,
-                  LAST_ID_OF_SECOND_MOVIE,
-                  LAST_ID_OF_THIRD_MOVIE
+                  TOTAL_NUMBER_OF_QUOTES
+                  // ,
+                  // LAST_ID_OF_FIRST_MOVIE,
+                  // LAST_ID_OF_SECOND_MOVIE,
+                  // LAST_ID_OF_THIRD_MOVIE
                 }
