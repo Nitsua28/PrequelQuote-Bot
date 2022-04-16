@@ -1,4 +1,4 @@
-# PrequelQuote-Bot v1.2.1 Alpha
+# PrequelQuote-Bot v1.2.2 Alpha
 ## Description:
 Simple Node.js Bot that generates quotes from the Star Wars Prequels from a AWS database of 690 quotes along with complementary GIFs.
 
