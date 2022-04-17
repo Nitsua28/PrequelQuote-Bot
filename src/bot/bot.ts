@@ -127,8 +127,8 @@ client.on('interactionCreate', async (interaction) => {
         filterExpression += "#m = :movie";
       }
       paramsScan["FilterExpression"] = filterExpression;
-      // console.log(filterExpression)
-      // console.log(paramsScan)
+      console.log(filterExpression)// for testing
+      console.log(paramsScan)// for testing
 
       docClient.scan(paramsScan, function(err, data) {
 
@@ -141,10 +141,10 @@ client.on('interactionCreate', async (interaction) => {
 
           } else {
               console.log("Scan succeeded.");
-              // console.log(data.Count);
-              // console.log(data.scannedCount);
+              console.log(data.Count);// for testing
+              console.log(data.scannedCount);// for testing
               let randNum = getRandomInt(0,data.Count - 1);
-              // console.log(data.Items)
+              console.log(data.Items) // for testing
               let randomID = data.Items[randNum]["ID"]
               params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
 
