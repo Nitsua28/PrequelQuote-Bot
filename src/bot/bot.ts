@@ -128,7 +128,7 @@ client.on('interactionCreate', async (interaction) => {
       }
       paramsScan["FilterExpression"] = filterExpression;
       console.log(filterExpression)// for testing
-      console.log(paramsScan)// for testing
+      console.log(paramsScan)// for testing 
 
       docClient.scan(paramsScan, function(err, data) {
 
