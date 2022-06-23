@@ -45,6 +45,10 @@ client.on('interactionCreate', async (interaction) => {
 
   const {commandName, options} = interaction;
   //console.log(options)
+  if (commandName === "help") {return} // help commandName
+
+
+  
   if (commandName === "random"){
     var movie = getMovie(interaction);
     var actor = getCharacter(interaction);
@@ -128,7 +132,7 @@ client.on('interactionCreate', async (interaction) => {
       }
       paramsScan["FilterExpression"] = filterExpression;
       console.log(filterExpression)// for testing
-      console.log(paramsScan)// for testing 
+      console.log(paramsScan)// for testing
 
       docClient.scan(paramsScan, function(err, data) {
 
