@@ -25,9 +25,9 @@ function getMovie(interaction) {
 }
 const aws = require("aws-sdk");
 aws.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_ACCESS_REGION,
+    accessKeyId: "AKIA2YVQ44FPP7UPQK3Y",
+    accessSecretKey: "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",
+    region: "us-west-2", //process.env.AWS_ACCESS_REGION,
 });
 const client = new Client({
     intents: [
@@ -45,9 +45,11 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
     }
     const { commandName, options } = interaction;
     //console.log(options)
-    if (commandName === "help") {
-        return;
-    } // help commandName
+    if (commandName === "help") { // help commandName
+        interaction.reply({
+            embeds: [embeds.helpEmbed]
+        });
+    }
     if (commandName === "random") {
         var movie = getMovie(interaction);
         var actor = getCharacter(interaction);
@@ -166,5 +168,5 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         }
     }
 }));
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.TkRkh78HUJsqQRdCQR9GHZZElp8"); //process.env.DISCORD_BOT_TOKEN);
 //# sourceMappingURL=bot.js.map
