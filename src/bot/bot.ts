@@ -45,10 +45,10 @@ client.on('interactionCreate', async (interaction) => {
 
   const {commandName, options} = interaction;
   //console.log(options)
-  if (commandName === "help") {return} // help commandName
+  if (commandName === "help") {return "babauy"} // help commandName
 
 
-  
+
   if (commandName === "random"){
     var movie = getMovie(interaction);
     var actor = getCharacter(interaction);

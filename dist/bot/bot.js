@@ -25,9 +25,9 @@ function getMovie(interaction) {
 }
 const aws = require("aws-sdk");
 aws.config.update({
-    accessKeyId: "AKIA2YVQ44FPDEPFQLL7",
-    accessSecretKey: "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",
-    region: "us-west-2", //process.env.AWS_ACCESS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_ACCESS_REGION,
 });
 const client = new Client({
     intents: [
@@ -45,10 +45,13 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
     }
     const { commandName, options } = interaction;
     //console.log(options)
+    if (commandName === "help") {
+        return;
+    } // help commandName
     if (commandName === "random") {
         var movie = getMovie(interaction);
         var actor = getCharacter(interaction);
-        if ((movie == null) && (actor == null)) { // if only random
+        if ((movie == null) && (actor == null)) { // if only random no params
             let randomID = getRandomInt(1, dataDoc.TOTAL_NUMBER_OF_QUOTES);
             params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
             docClient.query(params.paramsQuery, function (err, data) {
@@ -89,36 +92,38 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
                 filterExpression += "#a = :actor";
             }
             if (!(movie == null)) { // if movie
-                var startID;
-                var endID;
-                switch (movie) {
-                    case "0":
-                        startID = 1;
-                        endID = 1;
-                        break;
-                    case "1":
-                        startID = 2;
-                        endID = dataDoc.LAST_ID_OF_FIRST_MOVIE;
-                        break;
-                    case "2":
-                        startID = dataDoc.LAST_ID_OF_FIRST_MOVIE + 1;
-                        endID = dataDoc.LAST_ID_OF_SECOND_MOVIE;
-                        break;
-                    case "3":
-                        startID = dataDoc.LAST_ID_OF_SECOND_MOVIE + 1;
-                        endID = dataDoc.LAST_ID_OF_THIRD_MOVIE;
-                        break;
-                }
-                paramsScan["ExpressionAttributeValues"][":startID"] = startID.toString();
-                paramsScan["ExpressionAttributeValues"][":endID"] = endID.toString();
+                // var startID;
+                // var endID;
+                // switch(movie) {
+                //   case "0":
+                //     startID = 1;
+                //     endID = 1;
+                //     break;
+                //   case "1":
+                //     startID = 2
+                //     endID = dataDoc.LAST_ID_OF_FIRST_MOVIE;
+                //     break;
+                //   case "2":
+                //     startID = dataDoc.LAST_ID_OF_FIRST_MOVIE + 1;
+                //     endID = dataDoc.LAST_ID_OF_SECOND_MOVIE;
+                //     break;
+                //   case "3":
+                //     startID = dataDoc.LAST_ID_OF_SECOND_MOVIE + 1;
+                //     endID = dataDoc.LAST_ID_OF_THIRD_MOVIE;
+                //     break;
+                // }
+                // paramsScan["ExpressionAttributeValues"][":startID"] = startID.toString();
+                // paramsScan["ExpressionAttributeValues"][":endID"] = endID.toString();
+                paramsScan["ExpressionAttributeNames"]["#m"] = "Movie";
+                paramsScan["ExpressionAttributeValues"][":movie"] = movie;
                 if (!(actor == null)) {
                     filterExpression += " AND ";
                 }
-                filterExpression += "#id between :startID and :endID";
+                filterExpression += "#m = :movie";
             }
             paramsScan["FilterExpression"] = filterExpression;
-            // console.log(filterExpression)
-            // console.log(paramsScan)
+            console.log(filterExpression); // for testing
+            console.log(paramsScan); // for testing
             docClient.scan(paramsScan, function (err, data) {
                 if (err || data.Count == 0) {
                     console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
@@ -129,10 +134,10 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
                 }
                 else {
                     console.log("Scan succeeded.");
-                    // console.log(data.Count);
-                    // console.log(data.scannedCount);
+                    console.log(data.Count); // for testing
+                    console.log(data.scannedCount); // for testing
                     let randNum = getRandomInt(0, data.Count - 1);
-                    // console.log(data.Items)
+                    console.log(data.Items); // for testing
                     let randomID = data.Items[randNum]["ID"];
                     params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
                     docClient.query(params.paramsQuery, function (err, data) {
@@ -161,5 +166,5 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         }
     }
 }));
-client.login("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.jilga5KPeCoywYV0vlgTT2ry5c0"); //process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);
 //# sourceMappingURL=bot.js.map
