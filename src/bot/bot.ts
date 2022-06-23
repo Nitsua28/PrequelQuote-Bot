@@ -45,7 +45,11 @@ client.on('interactionCreate', async (interaction) => {
 
   const {commandName, options} = interaction;
   //console.log(options)
-  if (commandName === "help") {return "babauy"} // help commandName
+  if (commandName === "help") { // help commandName
+    interaction.reply({
+      embeds: [embeds.helpEmbed]
+    });
+  }
 
 
 
