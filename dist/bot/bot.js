@@ -25,9 +25,9 @@ function getMovie(interaction) {
 }
 const aws = require("aws-sdk");
 aws.config.update({
-    accessKeyId: "AKIA2YVQ44FPP7UPQK3Y",
-    accessSecretKey: "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",
-    region: "us-west-2", //process.env.AWS_ACCESS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_ACCESS_REGION, //process.env.AWS_ACCESS_REGION,
 });
 const client = new Client({
     intents: [
