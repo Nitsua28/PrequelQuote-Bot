@@ -168,5 +168,5 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         }
     }
 }));
-client.login("NTkxNTAxMjIzMTc0MjA5NTQ2.XQxscQ.TkRkh78HUJsqQRdCQR9GHZZElp8"); //process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN); //process.env.DISCORD_BOT_TOKEN);
 //# sourceMappingURL=bot.js.map
