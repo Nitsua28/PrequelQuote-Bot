@@ -23,6 +23,9 @@ function getCharacter(interaction) {
 function getMovie(interaction) {
     return interaction.options.getString("movie");
 }
+function getMeme(interaction) {
+    return interaction.options.getString("search");
+}
 const aws = require("aws-sdk");
 aws.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -49,6 +52,10 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         interaction.reply({
             embeds: [embeds.helpEmbed]
         });
+    }
+    if (commandName === "meme") { // meme commandName
+        var meme = getMeme(interaction);
+        interaction.reply(meme);
     }
     if (commandName === "random") {
         var movie = getMovie(interaction);

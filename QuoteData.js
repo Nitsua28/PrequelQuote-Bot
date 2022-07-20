@@ -9,6 +9,36 @@ const movies =[
               "Star Wars: Episode II – Attack of the Clones (2002)",
               "Star Wars: Episode III – Revenge of the Sith (2005)"
 ]
+
+const memes = [
+  ['Hello There','https://media.giphy.com/media/xTiIzJSKB4l7xTouE8/giphy.gif' ],
+  ['The High Ground', 'https://y.yarn.co/bfb1c0e7-dcaa-42bf-8987-ca7477b2188e_text.gif'],
+  ['I am the Senate', 'https://c.tenor.com/N19nWkkBBQoAAAAC/senate-palpatine.gif'],
+  ['I don\'t like Sand', 'https://thumbs.gfycat.com/CaringIncompleteArchaeocete-max-1mb.gif'],
+  ['Only a Sith deals in Absolutes', 'https://y.yarn.co/1a8ce731-5612-47d7-95a0-ce3c2ff25a55_text.gif'],
+  ['Now this is Podracing!', 'https://y.yarn.co/a1da0680-9daf-4b33-aab7-4ce322770354_text.gif'],
+  ['A surprise to be sure but a welcome one', 'https://y.yarn.co/24ddfcdc-affc-4026-b9d8-af11fd1a9d73_text.gif'],
+  ['This is where the fun begins', 'https://y.yarn.co/2ba68a1a-8d66-43ee-b460-62a868fc2940_text.gif'],
+  ['I love Democracy', 'https://y.yarn.co/e3898779-dcb9-4e67-82be-1841623f48c4_text.gif'],
+  ['Take a Seat, young Skywalker', 'https://y.yarn.co/7e07413f-2b67-416e-8739-359647370c37_text.gif'],
+  ['Unlimited Power!', 'https://y.yarn.co/b822abf6-7b16-4292-a0de-b3aac975d63b_text.gif'],
+  ['Do it', 'https://media.giphy.com/media/3o84sw9CmwYpAnRRni/giphy.gif'],
+  ['Another Happy Landing', 'https://c.tenor.com/e9yVO9Q1ckEAAAAC/kenobi-star-wars.gif'],
+  ['Ironic', 'https://y.yarn.co/ca04faaa-3dda-4387-b0db-61083285415a_text.gif'],
+  ['So uncivilized', 'https://y.yarn.co/66af609f-4014-46f2-b061-5951c605b58a_text.gif'],
+  ['It\'s treason then', 'https://y.yarn.co/ab36b498-4cc6-48dc-8bae-13a14c12347b_text.gif'],
+  ['Liar!', 'https://c.tenor.com/l3xkjzgkSdgAAAAM/liar-anakin.gif'],
+  ['I hate you!', 'https://c.tenor.com/Dd0f2DxCotwAAAAC/star-wars-anakin-skywalker.gif'],
+  ['Noooooo!!', 'https://c.tenor.com/Xp4a1oGXQGgAAAAC/noo-darth-vader.gif'],
+  ['Not just the men but the women and children too', 'https://c.tenor.com/eyubxiGAADwAAAAd/anakin-star-wars.gif'],
+  ['The ability to speak does not make you intelligent', 'https://y.yarn.co/b5198732-6dd2-47c4-a42b-dbd4b351d638_text.gif'],
+  ['Boss Nass', 'https://media.giphy.com/media/3o7abDVadnHuA4NZwk/giphy.gif'],
+  ['There\'s always a bigger fish', 'https://y.yarn.co/c43777d2-5aa6-462d-ac18-0631d70a602f_text.gif'],
+  ['I have brought Peace, Security etc', 'https://i.pinimg.com/originals/e8/40/0b/e8400be4b6cf42cb62601c4d726b9e5c.gif'], //https://c.tenor.com/bmm3Xu9yMAMAAAAS/i-see-through-the-lies-of-the-jedi-i-have-brought-peace-freedom-justice-and-security-to-my-new-empire.gif
+  ['Goooooood.', 'https://media.giphy.com/media/xTiIzL9Btjx9hegHT2/giphy.gif']
+
+];
+
 const characters = [
 ['Sheev Palpatine','Palpatine'], //array of Actor choices //left being choices that appear
 ['Watto','Watto'],
@@ -139,7 +169,8 @@ module.exports = {
                   movies,
                   characters,
                   actorPictures,
-                  TOTAL_NUMBER_OF_QUOTES
+                  TOTAL_NUMBER_OF_QUOTES,
+                  memes
                   // ,
                   // LAST_ID_OF_FIRST_MOVIE,
                   // LAST_ID_OF_SECOND_MOVIE,

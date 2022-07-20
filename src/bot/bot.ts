@@ -16,6 +16,11 @@ function getCharacter(interaction){
 function getMovie(interaction){
   return interaction.options.getString("movie");
 }
+
+function getMeme(interaction){
+  return interaction.options.getString("search");
+}
+
 const aws = require("aws-sdk");
 
 aws.config.update({
@@ -51,6 +56,11 @@ client.on('interactionCreate', async (interaction) => {
     });
   }
 
+  if (commandName === "meme") { // meme commandName
+    var meme = getMeme(interaction);
+
+    interaction.reply(meme);
+  }
 
 
   if (commandName === "random"){
