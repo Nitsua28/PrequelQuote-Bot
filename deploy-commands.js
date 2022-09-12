@@ -29,10 +29,10 @@ const commands = [
 													.addChoice('Original Trilogy', "T2")
                     )
 	,
-	// new SlashCommandBuilder() // help command
-	// .setName('help')
-	// .setDescription('Here\'s how to use the bot')
-	// ,
+	new SlashCommandBuilder() // help command
+	.setName('help')
+	.setDescription('Here\'s how to use the bot!')
+	,
 	new SlashCommandBuilder() // prequelmeme command
 	.setName('prequelsmemes')
 	.setDescription('Choose your favorite meme from the Prequels!')

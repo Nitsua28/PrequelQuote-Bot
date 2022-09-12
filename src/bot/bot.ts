@@ -50,11 +50,12 @@ client.on('interactionCreate', async (interaction) => {
 
   const {commandName, options} = interaction;
   //console.log(options)
-  // if (commandName === "help") { // help commandName
-  //   interaction.reply({
-  //     embeds: [embeds.helpEmbed]
-  //   });
-  // }
+  if (commandName === "help") { // help commandName
+    interaction.reply({
+      embeds: [embeds.helpEmbed]
+    });
+  }
+  
   if (commandName === "test") { //test a certain quote
     params.paramsQuery["ExpressionAttributeValues"][":id"] = "871";//enter id
     docClient.query(params.paramsQuery, function(err, data) {
