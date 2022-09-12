@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 
 const helpEmbed = new MessageEmbed()
   .setColor('#0099ff')
-  .setTitle('Prequel Quotes Generator - Commands')
+  .setTitle('PrequelsQuoteGenerator - Commands')
   .setDescription('Welcome to Prequels Quote Generator!')
   .setThumbnail('https://cdn.discordapp.com/app-icons/591501223174209546/2d2e82027601f7ccd4005e07093e2f96.png?size=256')
   .addFields(
