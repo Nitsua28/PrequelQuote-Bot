@@ -13,8 +13,8 @@ function getCharacter(interaction){
   return interaction.options.getString("character");
 }
 
-function getMovie(interaction){
-  return interaction.options.getString("movie");
+function getmovieOrTrilogy(interaction){
+  return interaction.options.getString("movieortrilogy");
 }
 
 function getMeme(interaction){
@@ -24,9 +24,9 @@ function getMeme(interaction){
 const aws = require("aws-sdk");
 
 aws.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID, //process.env.AWS_ACCESS_KEY_ID,
-  accessSecretKey:process.env.AWS_SECRET_ACCESS_KEY, //process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_ACCESS_REGION,//process.env.AWS_ACCESS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_ACCESS_REGION,
 
 });
 
@@ -50,13 +50,41 @@ client.on('interactionCreate', async (interaction) => {
 
   const {commandName, options} = interaction;
   //console.log(options)
-  if (commandName === "help") { // help commandName
-    interaction.reply({
-      embeds: [embeds.helpEmbed]
-    });
+  // if (commandName === "help") { // help commandName
+  //   interaction.reply({
+  //     embeds: [embeds.helpEmbed]
+  //   });
+  // }
+  if (commandName === "test") { //test a certain quote
+    params.paramsQuery["ExpressionAttributeValues"][":id"] = "871";//enter id
+    docClient.query(params.paramsQuery, function(err, data) {
+
+        if (err) {
+            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Query succeeded.");
+            data.Items.forEach(function(item) {
+
+                embeds.quoteEmbed
+                .setAuthor({name: dataDoc.movies[parseInt(item.Movie)]})//Actor
+                .setTitle(item.Actor)//movieOrTrilogy
+                .setDescription(item.Quote)//Quote
+                .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
+                .setImage(item.GIF)//gif scene
+                .setTimestamp()
+                .setFooter({text:item.ID})
+                ;
+            });
+            interaction.reply({
+              embeds: [embeds.quoteEmbed]
+            });
+          }
+    })
   }
 
-  if (commandName === "meme") { // meme commandName
+
+
+  if (commandName === "prequelsmemes" || commandName === "originaltrilogymemes") { // meme commandName
     var meme = getMeme(interaction);
 
     interaction.reply(meme);
@@ -64,89 +92,88 @@ client.on('interactionCreate', async (interaction) => {
 
 
   if (commandName === "random"){
-    var movie = getMovie(interaction);
+    var movieOrTrilogy = getmovieOrTrilogy(interaction);
     var actor = getCharacter(interaction);
 
-    if ((movie == null) && (actor == null)){ // if only random no params
-      let randomID = getRandomInt(1,dataDoc.TOTAL_NUMBER_OF_QUOTES);
-      params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
-      docClient.query(params.paramsQuery, function(err, data) {
+    var paramsScan = {
+        TableName: "PrequelQuotes",
+        ProjectionExpression: "#id",
+        ExpressionAttributeNames:{
+          "#id": "ID"
+        },
+        ExpressionAttributeValues:{}
+    };
 
-          if (err) {
-              console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-          } else {
-              console.log("Query succeeded.");
-              data.Items.forEach(function(item) {
+    var filterExpression = "";
 
-                  embeds.quoteEmbed
-                  .setAuthor({name: dataDoc.movies[parseInt(item.Movie)]})//Actor
-                  .setTitle(item.Actor)//Movie
-                  .setDescription(item.Quote)//Quote
-                  .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
-                  .setImage(item.GIF)//gif scene
-                  .setTimestamp()
-                  .setFooter({text:item.ID})
-                  ;
-              });
-              interaction.reply({
-                embeds: [embeds.quoteEmbed]
-              });
-          }
-      });
+    if (!(actor == null)){ //if actor
+
+      paramsScan["ExpressionAttributeNames"]["#a"] = "Actor";
+      paramsScan["ExpressionAttributeValues"][":actor"] = actor;
+      filterExpression += "#a = :actor";
     }
-    else{
-      var paramsScan = {
-          TableName: "PrequelQuotes",
-          ProjectionExpression: "#id",
-          ExpressionAttributeNames:{
-            "#id": "ID"
-          },
-          ExpressionAttributeValues:{}
-      };
-      var filterExpression = "";
 
-      if (!(actor == null)){ //if actor
+    //if ((movieOrTrilogy == null) && (actor == null)){ // if only random no params
 
-        paramsScan["ExpressionAttributeNames"]["#a"] = "Actor";
-        paramsScan["ExpressionAttributeValues"][":actor"] = actor;
-        filterExpression += "#a = :actor";
-      }
 
-      if (!(movie == null)){ // if movie
-        // var startID;
-        // var endID;
-        // switch(movie) {
-        //   case "0":
-        //     startID = 1;
-        //     endID = 1;
-        //     break;
-        //   case "1":
-        //     startID = 2
-        //     endID = dataDoc.LAST_ID_OF_FIRST_MOVIE;
-        //     break;
-        //   case "2":
-        //     startID = dataDoc.LAST_ID_OF_FIRST_MOVIE + 1;
-        //     endID = dataDoc.LAST_ID_OF_SECOND_MOVIE;
-        //     break;
-        //   case "3":
-        //     startID = dataDoc.LAST_ID_OF_SECOND_MOVIE + 1;
-        //     endID = dataDoc.LAST_ID_OF_THIRD_MOVIE;
-        //     break;
-        // }
 
-        // paramsScan["ExpressionAttributeValues"][":startID"] = startID.toString();
-        // paramsScan["ExpressionAttributeValues"][":endID"] = endID.toString();
+      // let randomID = getRandomInt(1,dataDoc.TOTAL_NUMBER_OF_QUOTES);
+      // params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
+      // docClient.query(params.paramsQuery, function(err, data) {
+      //
+      //     if (err) {
+      //         console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+      //     } else {
+      //         console.log("Query succeeded.");
+      //         data.Items.forEach(function(item) {
+      //
+      //             embeds.quoteEmbed
+      //             .setAuthor({name: dataDoc.movieOrTrilogys[parseInt(item.movieOrTrilogy)]})//Actor
+      //             .setTitle(item.Actor)//movieOrTrilogy
+      //             .setDescription(item.Quote)//Quote
+      //             .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
+      //             .setImage(item.GIF)//gif scene
+      //             .setTimestamp()
+      //             .setFooter({text:item.ID})
+      //             ;
+      //         });
+      //         interaction.reply({
+      //           embeds: [embeds.quoteEmbed]
+      //         });
 
-        paramsScan["ExpressionAttributeNames"]["#m"] = "Movie";
-        paramsScan["ExpressionAttributeValues"][":movie"] = movie;
+
+
+
+
+
+      if (!(movieOrTrilogy == null)){ // if movieOrTrilogy
+        //also by Trilogy
+
         if (!(actor == null)){
           filterExpression += " AND "
         }
-        filterExpression += "#m = :movie";
+
+        if (movieOrTrilogy[0] == "T"){
+          paramsScan["ExpressionAttributeNames"]["#t"] = "Trilogy";
+          paramsScan["ExpressionAttributeValues"][":trilogy"] = movieOrTrilogy[1];
+          filterExpression += "#t = :trilogy";
+        }
+        else {
+          paramsScan["ExpressionAttributeNames"]["#m"] = "Movie";
+          paramsScan["ExpressionAttributeValues"][":movie"] = movieOrTrilogy;
+          filterExpression += "#m = :movie";
+        }
+      }
+
+      if ((movieOrTrilogy == null) && (actor == null)){
+        let randTrilogy = getRandomInt(1, dataDoc.TOTAL_NUMBER_OF_TRILOGIES);
+        paramsScan["ExpressionAttributeNames"]["#t"] = "Trilogy";
+        paramsScan["ExpressionAttributeValues"][":trilogy"] = randTrilogy.toString();
+        filterExpression += "#t = :trilogy";
       }
       paramsScan["FilterExpression"] = filterExpression;
-      console.log(filterExpression)// for testing
-      console.log(paramsScan)// for testing
+      // console.log(filterExpression)// for testing
+      // console.log(paramsScan)// for testing
 
       docClient.scan(paramsScan, function(err, data) {
 
@@ -159,10 +186,10 @@ client.on('interactionCreate', async (interaction) => {
 
           } else {
               console.log("Scan succeeded.");
-              console.log(data.Count);// for testing
-              console.log(data.scannedCount);// for testing
+              // console.log(data.Count);// for testing
+              // console.log(data.scannedCount);// for testing
               let randNum = getRandomInt(0,data.Count - 1);
-              console.log(data.Items) // for testing
+              // console.log(data.Items) // for testing
               let randomID = data.Items[randNum]["ID"]
               params.paramsQuery["ExpressionAttributeValues"][":id"] = randomID.toString();
 
@@ -174,7 +201,7 @@ client.on('interactionCreate', async (interaction) => {
                       data.Items.forEach(function(item) {
                           embeds.quoteEmbed
                           .setAuthor({name: dataDoc.movies[parseInt(item.Movie)]})//Actor
-                          .setTitle(item.Actor)//Movie
+                          .setTitle(item.Actor)//movie
                           .setDescription(item.Quote)//Quote
                           .setThumbnail(dataDoc.actorPictures.get(item.Actor))//Actor picture
                           .setImage(item.GIF)//gif scene
@@ -191,7 +218,7 @@ client.on('interactionCreate', async (interaction) => {
           }
       });
   }
-}
+
 
 
 });

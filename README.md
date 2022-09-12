@@ -1,12 +1,13 @@
-# PrequelQuote-Bot v1.4.0
+# StarWarsQuote-Bot v2.0.0
 ## Description:
-Node.js Bot that generates quotes from the Star Wars Prequels from a AWS database of 690 quotes along with complementary GIFs.
+Node.js Bot that generates quotes and memes from Star Wars from a AWS database of over 2000 quotes along with complementary GIFs.
 
 ## Latest Changes:
 1.2.2 : Changed "Actor" choice to "Character"
 1.2.3 : Added two more Palpatine quotes missed in the third movie
 1.3.0 : Added /help command
 1.4.0 : Added /meme command
+2.0.0 : Added Original Trilogy quotes and Original Trilogy meme command. Deleted help command.
 
 ## Dependencies:
 * __node.js__ version 12+
