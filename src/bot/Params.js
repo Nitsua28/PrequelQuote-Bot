@@ -1,13 +1,13 @@
-var paramsQuery = {
-    TableName : "PrequelQuotes",
-    KeyConditionExpression: "#id = :id",
-    ExpressionAttributeNames:{
-        "#id": "ID"
-    },
-    ExpressionAttributeValues: {
-        ":id": ""
-    }
-};
+const paramsQuery = {
+  TableName: 'PrequelQuotes',
+  KeyConditionExpression: '#id = :id',
+  ExpressionAttributeNames: {
+    '#id': 'ID'
+  },
+  ExpressionAttributeValues: {
+    ':id': ''
+  }
+}
 
 // var paramsScan = {
 //     TableName: "PrequelQuotes",
@@ -22,4 +22,4 @@ var paramsQuery = {
 //
 // };
 
-module.exports = {paramsQuery};
+module.exports = { paramsQuery }
