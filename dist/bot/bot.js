@@ -28,9 +28,9 @@ function getMeme(interaction) {
 }
 const aws = require('aws-sdk');
 aws.config.update({
-    accessKeyId: 'AKIA2YVQ44FPEP5MHXFO',
-    accessSecretKey: '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',
-    region: 'us-west-2'
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_ACCESS_REGION
 });
 const client = new Client({
     intents: [
@@ -188,5 +188,5 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         });
     }
 }));
-client.login('NTkxNTAxMjIzMTc0MjA5NTQ2.G1--TE.jMCySlffwSxWt4YmGDgvcMvbIG_utEC40dLTv0'); // process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN); // process.env.DISCORD_BOT_TOKEN);
 //# sourceMappingURL=bot.js.map

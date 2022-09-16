@@ -23,9 +23,9 @@ function getMeme (interaction) {
 const aws = require('aws-sdk')
 
 aws.config.update({
-  accessKeyId: 'AKIA2YVQ44FPEP5MHXFO',
-  accessSecretKey: '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',
-  region: 'us-west-2'
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  accessSecretKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_ACCESS_REGION
 
 })
 
@@ -200,4 +200,4 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
-client.login('NTkxNTAxMjIzMTc0MjA5NTQ2.G1--TE.jMCySlffwSxWt4YmGDgvcMvbIG_utEC40dLTv0')// process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN)// process.env.DISCORD_BOT_TOKEN);
