@@ -3,13 +3,14 @@
 Node.js Bot that generates quotes and memes from Star Wars from a AWS database of over 2000 quotes along with complementary GIFs.
 
 ## Latest Changes:
-1.2.2 : Changed "Actor" choice to "Character"
-1.2.3 : Added two more Palpatine quotes missed in the third movie
-1.3.0 : Added /help command
-1.4.0 : Added /meme command
-2.0.0 : Added Original Trilogy quotes and Original Trilogy meme command
-2.0.1 : Readded help command
-2.0.2 : Reorganized code to JS standard
+1.2.2 : Changed "Actor" choice to "Character" <br>
+1.2.3 : Added two more Palpatine quotes missed in the third movie <br>
+1.3.0 : Added /help command <br>
+1.4.0 : Added /meme command <br>
+2.0.0 : Added Original Trilogy quotes and Original Trilogy meme command <br>
+2.0.1 : Readded help command <br>
+2.0.2 : Reorganized code to JS standard <br>
+
 ## Dependencies:
 * __node.js__ version 12+
 * __typescript__ version 4
@@ -28,4 +29,4 @@ s
 * Soon to be posted
 
 ### Demo
-<img src="https://media.giphy.com/media/84gFEejIZGso9K4BhC/giphy.gif" width="850" height="479"/>
+<img src="https://media.giphy.com/media/JAvQHituMxhmxAIqp9/giphy.gif" width="850" height="479"/>
