@@ -321,7 +321,29 @@ const actorPictures = new Map([
   ['AT-ST Pilot',
     'https://static.wikia.nocookie.net/starwars/images/6/64/At-st-driver-51eb6a3.png/revision/latest/scale-to-width-down/1000?cb=20170331071922'],
   ['George Lucas',
-    'https://static.wikia.nocookie.net/starwars/images/e/e3/Lucas.jpg/revision/latest/scale-to-width-down/1000?cb=20080819165433']
+    'https://static.wikia.nocookie.net/starwars/images/e/e3/Lucas.jpg/revision/latest/scale-to-width-down/1000?cb=20080819165433'],
+  ['Lor San Tekka',
+    'https://static.wikia.nocookie.net/starwars/images/c/cf/LorSanTekka.png/revision/latest?cb=20190604062506'],
+  ['Poe Dameron',
+    'https://static.wikia.nocookie.net/starwars/images/8/8a/Poe_Dameron_Advanced_Graphics_TROS.png/revision/latest?cb=20191007065136'],
+  ['Kylo Ren',
+    'https://cdn.mos.cms.futurecdn.net/8RRXRpNMcgJSNGQbizo3sf.jpg'],
+  ['Captain Phasma',
+    'https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Captain_Phasma.png/220px-Captain_Phasma.png'],
+  ['Unkar Plutt',
+    'https://static.wikia.nocookie.net/villains/images/b/be/Unkar-Plutt.jpg/revision/latest/top-crop/width/360/height/360?cb=20160608120116'],
+  ['Rey',
+    'https://static.wikia.nocookie.net/starwars/images/2/2b/Rey_TROS_Fathead.png/revision/latest?cb=20191007072042'],
+  ['Lawrence Kasdan & J.J. Abrams and Michael Arndt',
+    'https://www.wga.org/uploadedImages/craft/Arndt-Kasdan-Abrams.jpg'],
+  ['Finn',
+    'https://upload.wikimedia.org/wikipedia/en/2/2a/Finn-Force_Awakens_%282015%29.png'],
+  ['Armitage Hux',
+    'https://static.wikia.nocookie.net/starwars/images/d/d0/HuxTLJPromo.png/revision/latest/scale-to-width-down/1000?cb=20180501011100'],
+  ['Nastia Unamo',
+    'https://static.wikia.nocookie.net/starwars/images/9/92/Unamo.jpg/revision/latest/scale-to-width-down/250?cb=20160408114233&path-prefix=nl'],
+  ['Dopheld Mitaka',
+    'https://static.wikia.nocookie.net/starwars/images/0/08/Mitaka.png/revision/latest?cb=20160630195146']
 ])
 
 module.exports = {
