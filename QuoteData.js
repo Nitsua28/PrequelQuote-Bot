@@ -343,7 +343,12 @@ const actorPictures = new Map([
   ['Nastia Unamo',
     'https://static.wikia.nocookie.net/starwars/images/9/92/Unamo.jpg/revision/latest/scale-to-width-down/250?cb=20160408114233&path-prefix=nl'],
   ['Dopheld Mitaka',
-    'https://static.wikia.nocookie.net/starwars/images/0/08/Mitaka.png/revision/latest?cb=20160630195146']
+    'https://static.wikia.nocookie.net/starwars/images/0/08/Mitaka.png/revision/latest?cb=20160630195146'],
+  ['Bala-Tik',
+    'https://static.wikia.nocookie.net/starwars/images/1/18/Bala-Tik_CT.png/revision/latest?cb=20180107000555'],
+  ['Tasu Leech',
+    'https://static.wikia.nocookie.net/villains/images/5/5b/Tasu_Leech..jpg/revision/latest?cb=20170727114020']
+  
 ])
 
 module.exports = {
