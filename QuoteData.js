@@ -347,7 +347,11 @@ const actorPictures = new Map([
   ['Bala-Tik',
     'https://static.wikia.nocookie.net/starwars/images/1/18/Bala-Tik_CT.png/revision/latest?cb=20180107000555'],
   ['Tasu Leech',
-    'https://static.wikia.nocookie.net/villains/images/5/5b/Tasu_Leech..jpg/revision/latest?cb=20170727114020']
+    'https://static.wikia.nocookie.net/villains/images/5/5b/Tasu_Leech..jpg/revision/latest?cb=20170727114020'],
+  ['Supreme Leader Snoke',
+    'https://static.wikia.nocookie.net/starwars/images/f/f0/Snoke-TLJOCE.png/revision/latest?cb=20221204063658'],
+  ['Maz Kanata',
+    'https://upload.wikimedia.org/wikipedia/en/6/65/Maz_Kanata-Force_Awakens.jpg']
   
 ])
 
