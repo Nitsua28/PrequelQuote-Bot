@@ -351,7 +351,11 @@ const actorPictures = new Map([
   ['Supreme Leader Snoke',
     'https://static.wikia.nocookie.net/starwars/images/f/f0/Snoke-TLJOCE.png/revision/latest?cb=20221204063658'],
   ['Maz Kanata',
-    'https://upload.wikimedia.org/wikipedia/en/6/65/Maz_Kanata-Force_Awakens.jpg']
+    'https://upload.wikimedia.org/wikipedia/en/6/65/Maz_Kanata-Force_Awakens.jpg'],
+  ['Bazine Netal',
+    'https://static.wikia.nocookie.net/starwars/images/0/0b/Bazine_Netal_SWI165.png/revision/latest/scale-to-width-down/500?cb=20230125030849'],
+  ['Young Rey',
+    'https://static.wikia.nocookie.net/star-wars-canon/images/8/86/Young_Rey_with_Unkar_Plutt.png/revision/latest/scale-to-width-down/250?cb=20171210213738'] 
   
 ])
 
