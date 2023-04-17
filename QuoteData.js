@@ -355,7 +355,9 @@ const actorPictures = new Map([
   ['Bazine Netal',
     'https://static.wikia.nocookie.net/starwars/images/0/0b/Bazine_Netal_SWI165.png/revision/latest/scale-to-width-down/500?cb=20230125030849'],
   ['Young Rey',
-    'https://static.wikia.nocookie.net/star-wars-canon/images/8/86/Young_Rey_with_Unkar_Plutt.png/revision/latest/scale-to-width-down/250?cb=20171210213738'] 
+    'https://static.wikia.nocookie.net/star-wars-canon/images/8/86/Young_Rey_with_Unkar_Plutt.png/revision/latest/scale-to-width-down/250?cb=20171210213738'],
+  ['Stormtrooper(First Order)',
+    'https://static.wikia.nocookie.net/starwars/images/6/69/FOStormtrooper-SS.png/revision/latest?cb=20230109043551'] 
   
 ])
 
