@@ -357,7 +357,9 @@ const actorPictures = new Map([
   ['Young Rey',
     'https://static.wikia.nocookie.net/star-wars-canon/images/8/86/Young_Rey_with_Unkar_Plutt.png/revision/latest/scale-to-width-down/250?cb=20171210213738'],
   ['Stormtrooper(First Order)',
-    'https://static.wikia.nocookie.net/starwars/images/6/69/FOStormtrooper-SS.png/revision/latest?cb=20230109043551'] 
+    'https://static.wikia.nocookie.net/starwars/images/6/69/FOStormtrooper-SS.png/revision/latest?cb=20230109043551'],
+  ['Harter Kalonia',
+    'https://static.wikia.nocookie.net/starwars/images/f/f7/Harter_Kalonia_-_SW_Card_Trader.png/revision/latest/scale-to-width-down/1000?cb=20220212063836']
   
 ])
 
