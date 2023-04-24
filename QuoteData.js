@@ -359,7 +359,13 @@ const actorPictures = new Map([
   ['Stormtrooper(First Order)',
     'https://static.wikia.nocookie.net/starwars/images/6/69/FOStormtrooper-SS.png/revision/latest?cb=20230109043551'],
   ['Harter Kalonia',
-    'https://static.wikia.nocookie.net/starwars/images/f/f7/Harter_Kalonia_-_SW_Card_Trader.png/revision/latest/scale-to-width-down/1000?cb=20220212063836']
+    'https://static.wikia.nocookie.net/starwars/images/f/f7/Harter_Kalonia_-_SW_Card_Trader.png/revision/latest/scale-to-width-down/1000?cb=20220212063836'],
+  ['Temmin "Snap" Wexley',
+    'https://static.wikia.nocookie.net/starwars/images/2/22/SnapWexley-SWI198.png/revision/latest/scale-to-width-down/1000?cb=20201114055022'],
+  ['Major Ematt',
+    'https://static.wikia.nocookie.net/starwars/images/2/2d/EmattTLJ.png/revision/latest?cb=20180424032735'],
+  ['Ushos O. Statura',
+    'https://static.wikia.nocookie.net/star-wars-canon/images/4/4f/Statura_CT.png/revision/latest?cb=20160712233946']
   
 ])
 
