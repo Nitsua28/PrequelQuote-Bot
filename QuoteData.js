@@ -369,7 +369,15 @@ const actorPictures = new Map([
   ['Vober Dand',
     'https://static.wikia.nocookie.net/starwars/images/c/c6/Vober_Dand.png/revision/latest?cb=20220509232006'],
   ['Tabala Zo',
-    'https://static.wikia.nocookie.net/starwars/images/e/e7/Tabala.png/revision/latest/scale-to-width-down/1000?cb=20160405175006']
+    'https://static.wikia.nocookie.net/starwars/images/e/e7/Tabala.png/revision/latest/scale-to-width-down/1000?cb=20160405175006'],
+  ['Jessika Pava',
+    'https://static.wikia.nocookie.net/starwars/images/6/6e/JessPava-TFA.png/revision/latest?cb=20180321180627'],
+  ['Yolo Ziff',
+    'https://static.wikia.nocookie.net/starwars/images/5/54/Yolo_Ziff.png/revision/latest?cb=20160405140850'],
+  ['Lieutenant Rodinon',
+    'https://static.wikia.nocookie.net/starwars/images/7/7f/Rodinon-SW_Card_Trader.png/revision/latest?cb=20161220011202'],
+  ['Resistance Medic',
+    'https://static.wikia.nocookie.net/starwars/images/7/77/Resistance_trooper-SWFC.png/revision/latest?cb=20170831095747']
   
 ])
 
