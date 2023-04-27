@@ -365,7 +365,11 @@ const actorPictures = new Map([
   ['Major Ematt',
     'https://static.wikia.nocookie.net/starwars/images/2/2d/EmattTLJ.png/revision/latest?cb=20180424032735'],
   ['Ushos O. Statura',
-    'https://static.wikia.nocookie.net/star-wars-canon/images/4/4f/Statura_CT.png/revision/latest?cb=20160712233946']
+    'https://static.wikia.nocookie.net/star-wars-canon/images/4/4f/Statura_CT.png/revision/latest?cb=20160712233946'],
+  ['Vober Dand',
+    'https://static.wikia.nocookie.net/starwars/images/c/c6/Vober_Dand.png/revision/latest?cb=20220509232006'],
+  ['Tabala Zo',
+    'https://static.wikia.nocookie.net/starwars/images/e/e7/Tabala.png/revision/latest/scale-to-width-down/1000?cb=20160405175006']
   
 ])
 
