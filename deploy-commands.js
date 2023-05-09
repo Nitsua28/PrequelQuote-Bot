@@ -8,25 +8,30 @@ const commands = [
     .setName('random')
     .setDescription('Generate a Random Quote from Star Wars')
     .addStringOption(option =>
-                    option.setName('character')
-                          .setDescription('A Random Quote by Character')
-                          .setRequired(false)
-                          .setChoices(dataDoc.characters)
-                  )
+      option.setName('character')
+        .setDescription('A Random Quote by Character')
+        .setRequired(false)
+        .setAutocomplete(true)
+    )
+
     .addStringOption(option =>
-                    option.setName('movieortrilogy')
-                          .setDescription('A Random Quote by Movie or Trilogy')
-                          .setRequired(false)
-                        // .addChoice('All', "0")
+      option.setName('movieortrilogy')
+        .setDescription('A Random Quote by Movie or Trilogy')
+        .setRequired(false)
+      // .addChoice('All', "0")
                   		    .addChoice('Star Wars: Episode I – The Phantom Menace (1999)', '1')
                   		    .addChoice('Star Wars: Episode II – Attack of the Clones (2002)', '2')
                           .addChoice('Star Wars: Episode III – Revenge of the Sith (2005)', '3')
                   				.addChoice('Star Wars: Episode IV – A New Hope (1977)', '4')
                   				.addChoice('Star Wars: Episode V – The Empire Strikes Back (1980)', '5')
                   				.addChoice('Star Wars: Episode VI – Return of the Jedi (1983)', '6')
+                          .addChoice('Star Wars: Episode VII – The Force Awakens (2015)', '7')
                   				.addChoice('Prequels', 'T1')
                   				.addChoice('Original Trilogy', 'T2')
-                  ),
+                          .addChoice('Sequels', 'T3')
+                          .addChoice('PreDisney Era', 'N')
+    ),
+
   new SlashCommandBuilder() // help command
     .setName('help')
     .setDescription('Here\'s how to use the bot!'),
@@ -47,7 +52,16 @@ const commands = [
   												.setDescription('Type in your meme')
   												.setRequired(true)
   												.setChoices(dataDoc.originaltrilogymemes)
-  								)
+  								),
+  new SlashCommandBuilder() // sequels meme command
+    .setName('sequelsmemes')
+    .setDescription('Choose your favorite meme from the Sequels!')
+    .addStringOption(option =>
+                    option.setName('search')
+                          .setDescription('Type in your meme')
+                          .setRequired(true)
+                          .setChoices(dataDoc.sequelsmemes)
+    )
   // ,
   // new SlashCommandBuilder() //test command
   // .setName('test')
@@ -55,9 +69,9 @@ const commands = [
 ]
   .map(command => command.toJSON())
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_BOT_TOKEN)
+const rest = new REST({ version: '9' }).setToken('')
 // process.env.DISCORD_BOT_TOKEN
-rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_CLIENTID), { body: commands })//
+rest.put(Routes.applicationCommands(''), { body: commands })//
   .then(() => console.log('Successfully registered application commands.'))
   .catch(console.error)
 
