@@ -15,6 +15,7 @@ Discord Bot that generates quotes and memes from Star Wars from a AWS database o
 - Added over 100 Characters to choose from with auto-complete
 - Added preDisney option
 - Fixed bugs with gifs and actor pictures
+3.0.1 : Updated gif links due to Gfycat being discontinued
 
 ## Dependencies:
 * __node.js__ version 12+

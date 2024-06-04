@@ -25,7 +25,7 @@ const prequelsmemes = [
   ['I Am The Senate',
     'https://c.tenor.com/N19nWkkBBQoAAAAC/senate-palpatine.gif'],
   ['I Don\'t Like Sand',
-    'https://thumbs.gfycat.com/CaringIncompleteArchaeocete-max-1mb.gif'],
+    'https://media1.tenor.com/m/nTnWhTvv0uQAAAAd/i-dont-like-sand-anakin.gif'],
   ['Only A Sith Deals In Absolutes',
     'https://y.yarn.co/1a8ce731-5612-47d7-95a0-ce3c2ff25a55_text.gif'],
   ['Now this Is Podracing!',
@@ -107,7 +107,7 @@ const originaltrilogymemes = [
   ['Noooo! Noooooo!',
     'https://y.yarn.co/6d8a00cf-6d70-4cc7-b8fd-b7cfef8ffd72_text.gif'],
   ['You Want This...Don\'t You?',
-    'https://thumbs.gfycat.com/AthleticDismalCommabutterfly-size_restricted.gif'],
+    'https://y.yarn.co/641bb09e-7328-4b72-9489-b70e35db44f1_text.gif'],
   ['Han Charging Down The Hall',
     'https://i.pinimg.com/originals/b5/88/bd/b588bd9ff5cd7d6db05d53422ade26d3.gif'],
   ['Now Witness The Firepower Of This Fully Armed And Operational Battle Station.',
@@ -138,7 +138,7 @@ const sequelsmemes = [
   ['Luke Throwing Away Lightsaber',
     'https://media.tenor.com/xD9Y4160SDoAAAAC/luke-skywalker-throw.gif'],
   ['Leia Flying Through Space',
-    'https://thumbs.gfycat.com/UnrealisticMinorBorer-max-1mb.gif'],
+    'https://proxy.imagearchive.com/982/9823136ec744f9aa93ff368f6278d99c.gif'],
   ['Traitor!',
     'https://media.tenor.com/-qVtlByjs6MAAAAC/kylo-ren-traitor.gif'],
   ['REY!!!!',
@@ -164,7 +164,7 @@ const sequelsmemes = [
   ['Chewie, We\'re Home',
     'https://y.yarn.co/82d4d51b-123b-4708-adf4-e71807a00013_text.gif'],
   ['The Holdo Maneuver',
-    'https://thumbs.gfycat.com/SlightScholarlyLangur-max-1mb.gif']
+    'https://static.wikia.nocookie.net/d1172af4-7ac9-4d81-8c06-097399f46008']
 
 ]
 const characters = new Map([
