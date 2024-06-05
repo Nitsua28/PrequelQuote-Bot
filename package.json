@@ -1,6 +1,6 @@
 {
   "name": "StarWarsQuote-bot",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Simple Bot that generates quotes from the Star Wars Movies",
   "main": "index.js",
   "scripts": {
