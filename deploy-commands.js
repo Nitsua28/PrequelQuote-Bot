@@ -26,6 +26,8 @@ const commands = [
                   				.addChoice('Star Wars: Episode V – The Empire Strikes Back (1980)', '5')
                   				.addChoice('Star Wars: Episode VI – Return of the Jedi (1983)', '6')
                           .addChoice('Star Wars: Episode VII – The Force Awakens (2015)', '7')
+                          .addChoice('Star Wars: Episode VIII – The Last Jedi (2017)', '8')
+                          .addChoice('Star Wars: Episode IX – The Rise of Skywalker (2019)', '9')
                   				.addChoice('Prequels', 'T1')
                   				.addChoice('Original Trilogy', 'T2')
                           .addChoice('Sequels', 'T3')

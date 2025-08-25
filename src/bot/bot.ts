@@ -68,30 +68,6 @@ client.on('interactionCreate', async (interaction) => {
     })
   }
 
-  // if (commandName === 'test') { // test a certain quote
-  //   params.paramsQuery.ExpressionAttributeValues[':id'] = '871'// enter id
-  //   docClient.query(params.paramsQuery, function (err, data) {
-  //     if (err) {
-  //       console.error('Unable to query. Error:', JSON.stringify(err, null, 2))
-  //     } else {
-  //       console.log('Query succeeded.')
-  //       data.Items.forEach(function (item) {
-  //         embeds.quoteEmbed
-  //           .setAuthor({ name: dataDoc.movies[parseInt(item.Movie)] })// Actor
-  //           .setTitle(item.Actor)// movieOrTrilogy
-  //           .setDescription(item.Quote)// Quote
-  //           .setThumbnail(dataDoc.actorPictures.get(item.Actor))// Actor picture
-  //           .setImage(item.GIF)// gif scene
-  //           .setTimestamp()
-  //           .setFooter({ text: item.ID })
-  //       })
-  //       interaction.reply({
-  //         embeds: [embeds.quoteEmbed]
-  //       })
-  //     }
-  //   })
-  // }
-
   if (commandName === 'prequelsmemes' || 
       commandName === 'originaltrilogymemes' ||
       commandName === 'sequelsmemes') 

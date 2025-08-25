@@ -1,9 +1,6 @@
-const TOTAL_NUMBER_OF_QUOTES = 2514
+const TOTAL_NUMBER_OF_QUOTES = 2989
 const TOTAL_NUMBER_OF_TRILOGIES = 3
-const TOTAL_NUMBER_OF_CHARACTERS = 139
-// const LAST_ID_OF_FIRST_MOVIE = 281;
-// const LAST_ID_OF_SECOND_MOVIE = 429;
-// const LAST_ID_OF_THIRD_MOVIE = 690;
+const TOTAL_NUMBER_OF_CHARACTERS = 174
 
 const movies = [
   'Found in all the Movies', // placeholder
@@ -13,7 +10,9 @@ const movies = [
   'Star Wars: Episode IV – A New Hope (1977)',
   'Star Wars: Episode V – The Empire Strikes Back (1980)',
   'Star Wars: Episode VI – Return of the Jedi (1983)',
-  'Star Wars: Episode VII – The Force Awakens (2015)'
+  'Star Wars: Episode VII – The Force Awakens (2015)',
+  'Star Wars: Episode VIII – The Last Jedi (2017)',
+  'Star Wars: Episode IX – The Rise of Skywalker (2019)'
   // sequels to be added
 ]
 
@@ -305,7 +304,43 @@ const characters = new Map([
   ['Jessika Pava', 'Jessika Pava'],
   ['Yolo Ziff', 'Yolo Ziff'],
   ['Lieutenant Rodinon', 'Lieutenant Rodinon'],
-  ['Resistance Medic', 'Resistance Medic']
+  ['Resistance Medic', 'Resistance Medic'],
+  ['Rian Johnson', 'Rian Johnson'],
+  ['Edrison Peavey', 'Edrison Peavey'],
+  ['Moden Canady', 'Moden Canady'],
+  ['Tallissan Lintra','Tallissan Lintra'],
+  ['Larma D\'Acy','Larma D\'Acy'],
+  ['Amilyn Holdo','Amilyn Holdo '],
+  ['Rose Tico', 'Rose Tico'],
+  ['Canto Bight Police Department(CBPD)','Canto Bight Police Department(CBPD)'],
+  ['DJ(Don\'t Join)','DJ(Don\'t Join)'],
+  ['Temiri Blagg','Temiri Blagg'],
+  ['First Order Officer', 'First Order Officer'],
+  ['(Salty)Sharp','(Salty)Sharp'],
+  ['Kaydel Ko Connix','Kaydel Ko Connix'],
+  ['Oniho Zaya','Oniho Zaya'],
+  ['J.J. Abrams & Chris Terrio', 'J.J. Abrams & Chris Terrio'],
+  ['Boolio', 'Boolio'],
+  ['Beaumont Kin','Beaumont Kin'],
+  ['Enric Pryde', 'Enric Pryde'],
+  ['Tishra Kandia', 'Tishra Kandia'],
+  ['Zorii Bliss','Zorii Bliss'],
+  ['D-O', 'D-O'],
+  ['Babu Frik','Babu Frik'],
+  ['Miramir','Miramir'],
+  ['Dathan','Dathan'],
+  ['Jannah','Jannah'],
+  ['Dark Rey','Dark Rey'],
+  ['Ben Solo', 'Ben Solo'],
+  ['Milon Lenwith','Milon Lenwith'],
+  ['Masir Trach','Masir Trach'],
+  ['Frantis Griss','Frantis Griss'],
+  ['Ahsoka Tano','Ahsoka Tano'],
+  ['Kanan Jarrus','Kanan Jarrus'],
+  ['Luminara Unduli','Luminara Unduli'],
+  ['Aayla Secura','Aayla Secura'],
+  ['Adi Gallia','Adi Gallia'],
+  ['Tatooine Elder','Tatooine Elder']
 ])
 
 const actorPictures = new Map([
@@ -330,7 +365,7 @@ const actorPictures = new Map([
   ['Greedo',
     'https://static.wikia.nocookie.net/starwars/images/c/c6/Greedo.jpg/revision/latest?cb=20180209034210'],
   ['Jango Fett',
-    'https://static.wikia.nocookie.net/starwars/images/7/70/Jango_OP.jpg/revision/latest?cb=20071029210612'],
+    'https://static.wikia.nocookie.net/starwars/images/a/ad/JangoFett-SWBC20.png/revision/latest?cb=20231230051139'],
   ['Medical Droid',
     'https://lumiere-a.akamaihd.net/v1/images/midwife-droid_131becd0.jpeg?region=0%2C0%2C1186%2C668&width=768'],
   ['Queen Amidala',
@@ -352,7 +387,7 @@ const actorPictures = new Map([
   ['Jocasta Nu',
     'https://lumiere-a.akamaihd.net/v1/images/jocasta-nu_a3b32f08.jpeg?region=18%2C0%2C2208%2C1242&width=768'],
   ['Mas Amedda',
-    'https://static.wikia.nocookie.net/starwars/images/3/3f/Mas12432.jpg/revision/latest?cb=20130913002346'],
+    'https://static.wikia.nocookie.net/starwars/images/3/37/Mas_Amedda_SWCT.png/revision/latest/scale-to-width-down/1000?cb=20240803045307'],
   ['Boss Nass',
     'https://static.wikia.nocookie.net/starwars/images/6/63/BossNass-SWCT.png/revision/latest?cb=20200807030216'],
   ['Dexter Jettster',
@@ -384,7 +419,7 @@ const actorPictures = new Map([
   ['C-3PO',
     'https://static.wikia.nocookie.net/starwars/images/5/51/C-3PO_EP3.png/revision/latest?cb=20131005124036'],
   ['Giddean Danu',
-    'https://static.wikia.nocookie.net/starwars/images/4/44/Giddean_Danu.jpg/revision/latest?cb=20080116171219'],
+    'https://static.wikia.nocookie.net/starwars/images/9/97/GiddeanDanu-SWCTP.png/revision/latest?cb=20221031025234'],
   ['Sors Bandeam',
     'https://static.wikia.nocookie.net/starwars/images/5/52/SorsBandeam.png/revision/latest?cb=20130206000500'],
   ['Sebulba',
@@ -584,8 +619,80 @@ const actorPictures = new Map([
   ['Lieutenant Rodinon',
     'https://static.wikia.nocookie.net/starwars/images/7/7f/Rodinon-SW_Card_Trader.png/revision/latest?cb=20161220011202'],
   ['Resistance Medic',
-    'https://static.wikia.nocookie.net/starwars/images/7/77/Resistance_trooper-SWFC.png/revision/latest?cb=20170831095747']
-
+    'https://static.wikia.nocookie.net/starwars/images/7/77/Resistance_trooper-SWFC.png/revision/latest?cb=20170831095747'],
+  ['Rian Johnson',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Star_Wars-_The_Last_Jedi_Japan_Premiere_Red_Carpet-_Rian_Johnson_%2838905282292%29_%28cropped%29.jpg/1280px-Star_Wars-_The_Last_Jedi_Japan_Premiere_Red_Carpet-_Rian_Johnson_%2838905282292%29_%28cropped%29.jpg'],
+  ['Edrison Peavey',
+    'https://static.wikia.nocookie.net/starwars/images/0/0b/PeaveyDatabank.jpg/revision/latest?cb=20180105050714'],
+  ['Moden Canady',
+    'https://static.wikia.nocookie.net/starwars/images/a/aa/Moden_Canady.png/revision/latest?cb=20231026044654'],
+  ['Tallissan Lintra',
+    'https://static.wikia.nocookie.net/starwars/images/7/74/Tallissan_Lintra.png/revision/latest?cb=20231203215929'],
+  ['Larma D\'Acy',
+    'https://static.wikia.nocookie.net/starwars/images/5/5a/CommanderDacy-ToppsFinest2023.png/revision/latest?cb=20240129060222'],
+  ['Amilyn Holdo',
+    'https://static.wikia.nocookie.net/starwars/images/a/a7/AmilynHoldo-AoROCE.png/revision/latest?cb=20240405053656'],
+  ['Rose Tico',
+    'https://upload.wikimedia.org/wikipedia/en/f/f3/Rose_Tico_from_The_Last_Jedi.jpg'],
+  ['Canto Bight Police Department(CBPD)',
+    'https://static.wikia.nocookie.net/starwars/images/9/9c/CantoBightPolice.jpg/revision/latest?cb=20171227232648'],
+  ['DJ(Don\'t Join)',
+    'https://static.wikia.nocookie.net/starwars/images/d/d5/TLJ-DJ-Movie-no.jpg/revision/latest/scale-to-width-down/1000?cb=20171123160931'],
+  ['Temiri Blagg',
+    'https://static.wikia.nocookie.net/starwars/images/d/d1/TemiriBlagg-CGSWG.png/revision/latest?cb=20241218044228'],
+  ['First Order Officer',
+    'https://static.wikia.nocookie.net/starwars/images/b/bf/FirstOrderCommander-TROSGG.png/revision/latest?cb=20230725023943'],
+  ['(Salty)Sharp',
+    'https://static.wikia.nocookie.net/starwars/images/b/b8/Salty_Sharp.png/revision/latest?cb=20230725225455'],
+  ['Kaydel Ko Connix',
+    'https://static.wikia.nocookie.net/starwars/images/c/c6/Kaydel_Ko_Connix_TROSOCE.png/revision/latest/scale-to-width-down/1000?cb=20230812003525'],
+  ['Oniho Zaya',
+    'https://static.wikia.nocookie.net/starwars/images/2/2b/OnihoZaya-2024Base.png/revision/latest?cb=20231112164219'],
+  ['J.J. Abrams & Chris Terrio',
+    'https://media.gq.com/photos/5e160649da3bb600090ff2c9/16:9/w_2560%2Cc_limit/MCDSTWA_WD054%2520(1).jpg'],
+  ['Boolio',
+    'https://static.wikia.nocookie.net/starwars/images/f/ff/Boolio-ROTSOCE.png/revision/latest/scale-to-width-down/1000?cb=20211214232052'],
+  ['Beaumont Kin',
+    'https://static.wikia.nocookie.net/starwars/images/9/95/Beaumont_Kin.png/revision/latest?cb=20250527032244'],
+  ['Enric Pryde',
+    'https://static.wikia.nocookie.net/starwars/images/0/07/General_Pryde_TROSOCE.png/revision/latest?cb=20220922023316'],
+  ['Tishra Kandia',
+    'https://static.wikia.nocookie.net/starwars/images/1/1d/Tishra_Kandia_RoS_Visual_Dictionary.png/revision/latest?cb=20231125054506'],
+  ['Zorii Bliss',
+    'https://static.wikia.nocookie.net/starwars/images/0/08/ZoriiBliss-TSWB.png/revision/latest?cb=20241003043917'],
+  ['D-O',
+    'https://static.wikia.nocookie.net/starwars/images/9/91/D-O_Fathead.png/revision/latest/scale-to-width-down/1000?cb=20221029015457'],
+  ['Babu Frik',
+    'https://static.wikia.nocookie.net/starwars/images/4/40/BabuFrik-ToppsFinest2023.png/revision/latest/scale-to-width-down/1000?cb=20241123073427'],
+  ['Miramir',
+    'https://static.wikia.nocookie.net/starwars/images/3/3d/Reys_Mother.jpg/revision/latest?cb=20200319062415'],
+  ['Dathan',
+    'https://static.wikia.nocookie.net/starwars/images/a/ad/DathanBestoonLegacy-TROS.png/revision/latest?cb=20211020233020'],
+  ['Jannah',
+    'https://static.wikia.nocookie.net/starwars/images/7/78/Jannah-HeroesResistance.png/revision/latest?cb=20231022200416'],
+  ['Dark Rey',
+    'https://blogs-images.forbes.com/davidthier/files/2019/08/960x0-4.jpg'],
+  ['Ben Solo',
+    'https://static.wikia.nocookie.net/starwars/images/b/bc/KyloRenVFcover-TROS.png/revision/latest/scale-to-width-down/1000?cb=20250126000852'],
+  ['Milon Lenwith',
+    'https://static.wikia.nocookie.net/starwars/images/a/a7/Milon_Lenwith.png/revision/latest?cb=20241206013451'],
+  ['Masir Trach',
+    'https://static.wikia.nocookie.net/starwars/images/8/8e/Masir_Trach.png/revision/latest?cb=20241205034037'],
+  ['Frantis Griss',
+    'https://static.wikia.nocookie.net/starwars/images/9/9d/AdmiralGriss-VillainsFirstOrder.png/revision/latest?cb=20231022185525'],
+  ['Ahsoka Tano',
+    'https://static.wikia.nocookie.net/starwars/images/2/27/Ahsoka-Tano-AG-2023.png/revision/latest/scale-to-width-down/1000?cb=20231009063143'],
+  ['Kanan Jarrus',
+    'https://static.wikia.nocookie.net/starwars/images/a/a7/KananJarrus.png/revision/latest?cb=20230730203547'],
+  ['Luminara Unduli',
+    'https://static.wikia.nocookie.net/starwars/images/9/91/LuminaraUnduli-Encyclopedia.png/revision/latest?cb=20180206232118'],
+  ['Aayla Secura',
+    'https://static.wikia.nocookie.net/starwars/images/5/59/AaylaSecura-SWYBYNE.png/revision/latest?cb=20240313002805'],
+  ['Adi Gallia',
+    'https://static.wikia.nocookie.net/starwars/images/f/f2/AdiGallia2-SWE.png/revision/latest?cb=20240922163922'],
+  ['Tatooine Elder',
+    'https://static.wikia.nocookie.net/starwars/images/c/c3/Unidentified_Tatooine_elder.jpg/revision/latest?cb=20200329095952']
+  
 ])
 
 module.exports = {
@@ -598,8 +705,4 @@ module.exports = {
   prequelsmemes,
   originaltrilogymemes,
   sequelsmemes
-  // ,
-  // LAST_ID_OF_FIRST_MOVIE,
-  // LAST_ID_OF_SECOND_MOVIE,
-  // LAST_ID_OF_THIRD_MOVIE
 }
