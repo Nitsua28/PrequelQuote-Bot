@@ -16,7 +16,7 @@ Discord Bot that generates quotes and memes from Star Wars from a database of ar
 - Added preDisney option
 - Fixed bugs with gifs and actor pictures
 
-3.0.1 : Updated gif links due to Gfycat being discontinued
+3.0.1 : Updated gif links due to Gfycat being discontinued <br>
 4.0.0 : Added the Last Jedi and The Rise of Skywalker quotes with updated gifs and actor pictures
 
 ## Dependencies:

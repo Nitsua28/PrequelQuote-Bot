@@ -310,7 +310,7 @@ const characters = new Map([
   ['Moden Canady', 'Moden Canady'],
   ['Tallissan Lintra','Tallissan Lintra'],
   ['Larma D\'Acy','Larma D\'Acy'],
-  ['Amilyn Holdo','Amilyn Holdo '],
+  ['Amilyn Holdo','Amilyn Holdo'],
   ['Rose Tico', 'Rose Tico'],
   ['Canto Bight Police Department(CBPD)','Canto Bight Police Department(CBPD)'],
   ['DJ(Don\'t Join)','DJ(Don\'t Join)'],
