@@ -27,7 +27,7 @@
     "@aws-sdk/lib-dynamodb": "^3.1080.0",
     "@discordjs/builders": "^1.14.1",
     "@discordjs/rest": "^2.6.1",
-    "aws-sdk": "^2.1085.0",
+    "aws-sdk": "^2.1162.0",
     "discord-api-types": "^0.38.49",
     "discord.js": "^14.26.4",
     "jsonfile": "^6.2.1",
