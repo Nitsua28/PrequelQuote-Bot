@@ -8,13 +8,18 @@ const paramsQuery = {
     ':id': ''
   }
 }
-const paramsScan = {
-  TableName: 'PrequelQuotes',
-  ProjectionExpression: '#id',
-  ExpressionAttributeNames: {
-    '#id': 'ID'
-  },
-  ExpressionAttributeValues: {}
-}
-module.exports = { paramsScan, paramsQuery }
-// # sourceMappingURL=params.js.map
+
+// var paramsScan = {
+//     TableName: "PrequelQuotes",
+//     ProjectionExpression: "#id",
+//     ExpressionAttributeNames:{
+//       "#id": "ID"
+//     },
+//     ExpressionAttributeValues:{
+//
+//     }
+//
+//
+// };
+
+module.exports = { paramsQuery }

@@ -1,6 +1,6 @@
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 
-const helpEmbed = new MessageEmbed()
+const helpEmbed = new EmbedBuilder()
   .setColor('#0099ff')
   .setTitle('PrequelsQuoteGenerator - Commands')
   .setDescription('Welcome to Star Wars Prequels Quote Generator!')
@@ -16,7 +16,7 @@ const helpEmbed = new MessageEmbed()
   )
   .setTimestamp()
 
-const quoteEmbed = new MessageEmbed()
+const quoteEmbed = new EmbedBuilder()
   .setColor('#0099ff')
 
 module.exports = { quoteEmbed, helpEmbed }
