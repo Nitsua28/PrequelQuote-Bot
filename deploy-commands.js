@@ -8,6 +8,16 @@ const formatChoices = (memeArray) => {
 };
 
 const commands = [
+  new SlashCommandBuilder()
+  .setName('searchquote')
+    .setDescription('Find your quote from Star Wars')
+    .addStringOption(option =>
+      option.setName('quote')
+        .setDescription('Find your quote from Star Wars')
+        .setRequired(true)
+        .setAutocomplete(true)
+    )
+  ,
   new SlashCommandBuilder() // random
     .setName('random')
     .setDescription('Generate a Random Quote from Star Wars')

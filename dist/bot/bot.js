@@ -14,6 +14,7 @@ const client_dynamodb_1 = require("@aws-sdk/client-dynamodb");
 const lib_dynamodb_1 = require("@aws-sdk/lib-dynamodb");
 const { Client, GatewayIntentBits } = require('discord.js');
 const dataDoc = require('../../QuoteData.js');
+const quoteDoc = require('../../Quotes.js');
 const embeds = require('./Embeds.js');
 const params = require('./Params.js');
 const path = require('path');
@@ -31,6 +32,9 @@ function getmovieOrTrilogy(interaction) {
 function getMeme(interaction) {
     return interaction.options.getString('search');
 }
+function getQuote(interaction) {
+    return interaction.options.getString('quote');
+}
 function cleanUrlName(filename) {
     const extension = path.extname(filename);
     const name = path.basename(filename, extension);
@@ -47,12 +51,54 @@ function cleanUrlName(filename) {
     // Reattach the original extension in lowercase
     return `${cleanName}${extension.toLowerCase()}`;
 }
+function normalizeString(str) {
+    return str
+        .toLowerCase()
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g, "") // Remove punctuation
+        .replace(/\s+/g, " ") // Collapse multiple spaces to a single space
+        .trim(); // Remove leading/trailing spaces
+}
+function getExtension(filename) {
+    switch (true) {
+        case filename.endsWith("gif"):
+            return 'gif';
+        case filename.endsWith("png"):
+            return 'png';
+        case filename.endsWith("jpg"):
+            return 'jpg';
+        case filename.endsWith("jpeg"):
+            return 'jpeg';
+        case filename.endsWith("webp"):
+            return 'webp';
+    }
+}
+function isPacificWeekend() {
+    const pacificString = new Date().toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles",
+        weekday: "short"
+    });
+    return pacificString === "Sat" || pacificString === "Sun";
+}
+;
+function sortChoices(arr, word) {
+    return arr.sort((a, b) => {
+        // Exact matches or starts-with matches take priority
+        const aStart = a.toLowerCase().startsWith(word.toLowerCase());
+        const bStart = b.toLowerCase().startsWith(word.toLowerCase());
+        if (aStart && !bStart)
+            return -1;
+        if (!aStart && bStart)
+            return 1;
+        // Otherwise, shorter names closer to the search length come first
+        return a.length - b.length;
+    });
+}
 const docClient = new client_dynamodb_1.DynamoDBClient({
     credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
-    region: process.env.AWS_REGION,
+    region: "us-west-2",
 });
 const client = new Client({
     intents: [
@@ -64,14 +110,33 @@ client.on('ready', () => {
     console.log('Bot Online');
 });
 client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
-    const choices = [];
-    Array.from(dataDoc.characters.keys()).forEach((item) => choices.push(item));
-    if (interaction.isAutocomplete()) {
+    const charChoices = [];
+    Array.from(dataDoc.characters.keys()).forEach((item) => charChoices.push(item));
+    const quoteChoices = [];
+    Array.from(quoteDoc.quotes.keys()).forEach((item) => quoteChoices.push(item));
+    if (interaction.isAutocomplete() && interaction.commandName === 'random') {
         const focusedValue = interaction.options.getFocused();
-        let filtered = choices.filter(choice => choice.toLowerCase().includes(focusedValue.toLowerCase()));
+        let filtered = charChoices.filter(choice => choice.toLowerCase().includes(focusedValue.toLowerCase()));
+        if (focusedValue.length > 0)
+            filtered = sortChoices(filtered, focusedValue);
         if (filtered.length > 25)
-            filtered = []; // discord's 25 choice limit
-        yield interaction.respond(filtered.map(choice => ({ name: choice, value: dataDoc.characters.get(choice) })));
+            filtered = filtered.slice(0, 25); // discord's 25 choice limit
+        yield interaction.respond(filtered.map(choice => ({ name: choice, value: dataDoc.characters.get(choice) })), console.log(filtered));
+    }
+    else if (interaction.isAutocomplete() && interaction.commandName === 'searchquote') {
+        const focusedValue = normalizeString(interaction.options.getFocused());
+        let filtered = quoteChoices.filter(choice => {
+            const normalizeChoice = normalizeString(choice);
+            return normalizeChoice.toLowerCase().includes(focusedValue.toLowerCase());
+        });
+        if (focusedValue.length > 0)
+            filtered = sortChoices(filtered, focusedValue);
+        if (filtered.length > 25)
+            filtered = filtered.slice(0, 25); // discord's 25 choice limit
+        yield interaction.respond(filtered.map(choice => ({
+            name: choice.length > 100 ? `${choice.substring(0, 97)}...` : choice, // discord's 100 character limit
+            value: quoteDoc.quotes.get(choice)
+        })));
     }
     if (!interaction.isCommand())
         return;
@@ -87,6 +152,84 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
         //see deploy-commands.js for how the memes work
         const meme = getMeme(interaction);
         interaction.reply(`https://starwars-gifs.s3.us-west-2.amazonaws.com/${meme}`);
+    }
+    if (commandName === 'searchquote') {
+        try {
+            if (isPacificWeekend()) {
+                const botId = interaction.client.user.id;
+                const userId = interaction.user.id;
+                const topGgToken = process.env.TOPGG_TOKEN;
+                // Fetch vote status from the Top.gg API
+                const response = yield fetch(`https://top.gg/api/bots/${botId}/check?userId=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': topGgToken
+                    }
+                });
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        return yield interaction.reply({
+                            content: 'User not found on Top.gg. Please make sure you have created a Top.gg account and logged in at https://top.gg before voting!',
+                            ephemeral: true
+                        });
+                    }
+                    return yield interaction.reply({
+                        content: 'Failed to connect to the voting verification server. Try again later.',
+                        ephemeral: true
+                    });
+                }
+                const data = yield response.json();
+                // top.gg returns { voted: 1 } if true, or { voted: 0 } if false
+                if (data.voted === 0) {
+                    return yield interaction.reply({
+                        embeds: [embeds.voteEmbed],
+                        files: [embeds.voteImg],
+                        ephemeral: true
+                    });
+                }
+            }
+            const quoteID = getQuote(interaction);
+            params.paramsQuery.ExpressionAttributeValues = {
+                ':id': quoteID
+            };
+            let queryCommand = new lib_dynamodb_1.QueryCommand(params.paramsQuery);
+            docClient.send(queryCommand, function (err, data) {
+                if (err) {
+                    console.error('Unable to query. Error:', JSON.stringify(err, null, 2));
+                }
+                else {
+                    console.log('Query succeeded.');
+                    data.Items.forEach(function (item) {
+                        const actorPictureLinkName = dataDoc.actorPictures.get(item.Actor).toLowerCase();
+                        let actorLinkExtension = getExtension(actorPictureLinkName);
+                        const lowerFilename = item.GIF.toLowerCase();
+                        let extension = getExtension(lowerFilename);
+                        const cleanedActorUrl = cleanUrlName(`${item.Actor}.${actorLinkExtension}`);
+                        //taken from aws
+                        const actorPicUrl = `https://${s3BucketName}.s3.${region}.amazonaws.com/actorpictures/${cleanedActorUrl}`;
+                        const gifUrl = `https://${s3BucketName}.s3.${region}.amazonaws.com/movies/${item.ID}.${extension}`;
+                        embeds.quoteEmbed
+                            .setAuthor({ name: dataDoc.movies[parseInt(item.Movie)] }) // Actor
+                            .setTitle(item.Actor) // movie
+                            .setDescription(item.Quote) // Quote
+                            .setThumbnail(actorPicUrl) // Actor picture
+                            .setImage(gifUrl) // gif scene
+                            .setTimestamp()
+                            .setFooter({ text: item.ID });
+                        interaction.reply({
+                            embeds: [embeds.quoteEmbed]
+                        });
+                    });
+                }
+            });
+        }
+        catch (error) {
+            console.error('Top.gg API error:', error);
+            yield interaction.reply({
+                content: 'An error occurred while checking your vote status...',
+                ephemeral: true
+            });
+        }
     }
     if (commandName === 'random') {
         const movieOrTrilogy = getmovieOrTrilogy(interaction);
@@ -164,40 +307,9 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
                         console.log('Query succeeded.');
                         data.Items.forEach(function (item) {
                             const actorPictureLinkName = dataDoc.actorPictures.get(item.Actor).toLowerCase();
-                            let actorLinkExtension = '';
-                            switch (true) {
-                                case actorPictureLinkName.endsWith("png"):
-                                    actorLinkExtension = 'png';
-                                    break;
-                                case actorPictureLinkName.endsWith("jpg"):
-                                    actorLinkExtension = 'jpg';
-                                    break;
-                                case actorPictureLinkName.endsWith("jpeg"):
-                                    actorLinkExtension = 'jpeg';
-                                    break;
-                                case actorPictureLinkName.endsWith("webp"):
-                                    actorLinkExtension = 'webp';
-                                    break;
-                            }
+                            let actorLinkExtension = getExtension(actorPictureLinkName);
                             const lowerFilename = item.GIF.toLowerCase();
-                            let extension = '';
-                            switch (true) {
-                                case lowerFilename.endsWith("gif"):
-                                    extension = 'gif';
-                                    break;
-                                case lowerFilename.endsWith("png"):
-                                    extension = 'png';
-                                    break;
-                                case lowerFilename.endsWith("jpg"):
-                                    extension = 'jpg';
-                                    break;
-                                case lowerFilename.endsWith("jpeg"):
-                                    extension = 'jpeg';
-                                    break;
-                                case lowerFilename.endsWith("webp"):
-                                    extension = 'webp';
-                                    break;
-                            }
+                            let extension = getExtension(lowerFilename);
                             const cleanedActorUrl = cleanUrlName(`${item.Actor}.${actorLinkExtension}`);
                             //taken from aws
                             const actorPicUrl = `https://${s3BucketName}.s3.${region}.amazonaws.com/actorpictures/${cleanedActorUrl}`;
