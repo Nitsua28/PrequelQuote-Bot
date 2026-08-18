@@ -1,7 +1,7 @@
 import { integer } from 'aws-sdk/clients/cloudfront'
 import { logger } from '../utils/logger'
 import { DynamoDBClient} from "@aws-sdk/client-dynamodb"
-import { ScanCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { ScanCommand, QueryCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 const { Client, GatewayIntentBits} = require('discord.js')
 const dataDoc = require('../../QuoteData.js')
 const quoteDoc = require('../../Quotes.js')
@@ -11,9 +11,14 @@ const path = require('path');
 
 const s3BucketName = "starwars-gifs"
 const region = "us-west-2"
+const DAILY_INTERVAL = 24 * 60 * 60 * 1000
 
 function getRandomInt (min: integer, max: integer) {
   return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function getChannel (interaction: any){
+  return interaction.options.getChannel('target-channel')
 }
 
 function getCharacter (interaction: any) {
@@ -97,6 +102,182 @@ function sortChoices(arr: string [], word: string) {
     });
 }
 
+
+
+async function randomQuotesForSchedule(){
+  const allGuildInfo: any[] = []
+  let lastEvaluatedKey = undefined;
+
+  try {
+      do {
+        const params: any = {
+          TableName: "Autopostchannels",
+          ExclusiveStartKey: lastEvaluatedKey,
+        };
+
+        const response = await docClient.send(new ScanCommand(params));
+        
+        // Add the current page of items to our master list
+        if (response.Items) {
+          allGuildInfo.push(...response.Items);
+        }
+
+        // Track the pagination token provided by DynamoDB
+        lastEvaluatedKey = response.LastEvaluatedKey;
+
+      } while (lastEvaluatedKey); // Loop stops when lastEvaluatedKey is undefined
+
+      console.log(`Successfully retrieved all items. Total count: ${allGuildInfo.length}`);
+      
+
+    } catch (error) {
+      console.error("Error scanning the table:", error);
+      throw error;
+    }
+
+  for (const item of allGuildInfo){
+    const channel = await client.channels.fetch(item.ChannelID);
+    const movieOrTrilogy = item.MovieOrTrilogy
+    const actor = item.Character
+
+    const paramsScan: any = {
+      TableName: 'PrequelQuotes',
+      ProjectionExpression: '#id',
+      ExpressionAttributeNames: {
+        '#id': 'ID'
+      },
+      ExpressionAttributeValues: {}
+    }
+
+    let filterExpression = ''
+
+    if (!(actor == null)) { // if actor
+      paramsScan.ExpressionAttributeNames['#a'] = 'Actor'
+      paramsScan.ExpressionAttributeValues[':actor'] = actor
+      filterExpression += '#a = :actor'
+    }
+
+    if (!(movieOrTrilogy == null)) { // if movieOrTrilogy
+      // also by Trilogy
+
+      if (!(actor == null)) filterExpression += ' AND '
+
+      switch(movieOrTrilogy[0]) {
+        case 'T':
+          paramsScan.ExpressionAttributeNames['#t'] = 'Trilogy'
+          paramsScan.ExpressionAttributeValues[':trilogy'] = movieOrTrilogy[1]
+          filterExpression += '#t = :trilogy'
+          break;
+        case 'N':
+          paramsScan.ExpressionAttributeNames['#t'] = 'Trilogy'
+          paramsScan.ExpressionAttributeValues[':trilogy1'] = '1'
+          paramsScan.ExpressionAttributeValues[':trilogy2'] = '2'
+          filterExpression += '#t IN (:trilogy1, :trilogy2)'
+          break;
+        default:
+          paramsScan.ExpressionAttributeNames['#m'] = 'Movie'
+          paramsScan.ExpressionAttributeValues[':movie'] = movieOrTrilogy
+          filterExpression += '#m = :movie'
+          break;
+      }
+    }
+
+    if ((movieOrTrilogy == null) && (actor == null)) {
+      //this is because I want the number of quotes generated from each trilogy to be balanced
+      //for better user experience
+      //original trilogy has too many quotes
+      const randTrilogy = getRandomInt(1, dataDoc.TOTAL_NUMBER_OF_TRILOGIES)
+      paramsScan.ExpressionAttributeNames['#t'] = 'Trilogy'
+      paramsScan.ExpressionAttributeValues[':trilogy'] = randTrilogy.toString()
+      filterExpression += '#t = :trilogy'
+    }
+    paramsScan['FilterExpression'] = filterExpression
+    let command = new ScanCommand(paramsScan);
+
+    docClient.send(command, async function (err: any, data: any) {
+      if (err || data.Count === 0) {
+        console.error('Unable to scan the table. Error JSON:', JSON.stringify(err, null, 2))
+        if (data.Count === 0) {
+          await channel.send({ content: 'No quote was found....' })
+          console.log('No Quote Found. ERROR.')
+        }
+      } else {
+        console.log('Scan succeeded.')
+        const randNum = getRandomInt(0, data.Count - 1)
+        const randomID = data.Items[randNum].ID
+        params.paramsQuery.ExpressionAttributeValues = {
+          ':id': randomID.toString()
+        } 
+
+        let queryCommand = new QueryCommand(params.paramsQuery)
+        console.log("sending")
+        docClient.send(queryCommand, function (err: any, data: any) {
+          if (err) {
+            console.error('Unable to query. Error:', JSON.stringify(err, null, 2))
+          } else {
+            console.log('Query succeeded.')
+            data.Items.forEach(async function (item: any) {
+              
+              const actorPictureLinkName = dataDoc.actorPictures.get(item.Actor).toLowerCase()
+              let actorLinkExtension = getExtension(actorPictureLinkName)
+              
+              const lowerFilename = item.GIF.toLowerCase()
+              let extension = getExtension(lowerFilename)
+              
+              const cleanedActorUrl = cleanUrlName(`${item.Actor}.${actorLinkExtension}`)
+              //taken from aws
+              const actorPicUrl = `https://${s3BucketName}.s3.${region}.amazonaws.com/actorpictures/${cleanedActorUrl}`
+              const gifUrl = `https://${s3BucketName}.s3.${region}.amazonaws.com/movies/${item.ID}.${extension}`
+              
+              embeds.quoteEmbed
+                .setAuthor({ name: dataDoc.movies[parseInt(item.Movie)] })// Actor
+                .setTitle(item.Actor)// movie
+                .setDescription(item.Quote)// Quote
+                .setThumbnail(actorPicUrl)// Actor picture
+                .setImage(gifUrl)// gif scene
+                .setTimestamp()
+                .setFooter({ text: item.ID })
+
+              await channel.send({
+                embeds: [embeds.quoteEmbed]
+              })
+            })
+          }
+        })
+        }
+      })
+  }
+}
+
+async function scheduleDailyPosts(targetHour: any, targetMinute = 0) {
+    const now : any = new Date();
+    const nextExecution : any = new Date();
+    
+    // Set the target time for today
+    nextExecution.setHours(targetHour, targetMinute, 0, 0);
+
+    // If that time has already passed today, target the same time tomorrow
+    if (now > nextExecution) {
+        nextExecution.setDate(nextExecution.getDate() + 1);
+    }
+
+    // Calculate how many milliseconds to wait until the first run
+    const timeUntilFirstRun = nextExecution - now;
+
+    console.log("scheduling")
+    // Step 1: Wait until the exact target time: 12pm
+    setTimeout(() => {
+
+        console.log("It's time for daily!")
+        randomQuotesForSchedule(); // Execute the first time
+
+        // Step 2: Establish the 24-hour cycle from this point forward
+        
+        setInterval(randomQuotesForSchedule, DAILY_INTERVAL); 
+
+    }, timeUntilFirstRun);
+}
+
 const docClient = new DynamoDBClient({
   credentials: { //! to ignore undefined
       accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
@@ -116,6 +297,8 @@ client.on('ready', () => {
   console.log('Bot Online')
 })
 
+scheduleDailyPosts(12,0) // for noon everyday
+
 client.on('interactionCreate', async (interaction: any) => {
   const charChoices: any [] = [];
   Array.from(dataDoc.characters.keys()).forEach((item) => charChoices.push(item));
@@ -123,7 +306,7 @@ client.on('interactionCreate', async (interaction: any) => {
   const quoteChoices: any [] = [];
   Array.from(quoteDoc.quotes.keys()).forEach((item) => quoteChoices.push(item));
 
-  if (interaction.isAutocomplete() && interaction.commandName === 'random'){ 
+  if (interaction.isAutocomplete() && (interaction.commandName === 'random'|| interaction.commandName === 'setautopostchannel')){ 
     const focusedValue = interaction.options.getFocused();
 
     let filtered = charChoices.filter(choice => choice.toLowerCase().includes(focusedValue.toLowerCase()));
@@ -132,7 +315,6 @@ client.on('interactionCreate', async (interaction: any) => {
     if (filtered.length > 25) filtered = filtered.slice(0, 25); // discord's 25 choice limit
     await interaction.respond(
       filtered.map(choice => ({ name: choice, value: dataDoc.characters.get(choice)})),
-      console.log(filtered)
     );
   }
   else if (interaction.isAutocomplete() && interaction.commandName === 'searchquote'){
@@ -156,6 +338,10 @@ client.on('interactionCreate', async (interaction: any) => {
     );
   }
 
+
+
+  
+
   if (!interaction.isCommand()) return;
 
   const { commandName } = interaction
@@ -164,6 +350,38 @@ client.on('interactionCreate', async (interaction: any) => {
     interaction.reply({
       embeds: [embeds.helpEmbed]
     })
+  }
+
+  if (commandName === 'setautopostchannel') { // setting channel to auto post random quotes
+
+    // Extract the selected channel object
+    const selectedChannel = getChannel(interaction);
+    const selectedCharacter = getCharacter(interaction);
+    const selectedMovorTri = getmovieOrTrilogy(interaction);
+
+    // Save the channel ID for this specific server
+    try{
+          await docClient.send(new PutCommand({
+          TableName: "Autopostchannels",
+          Item: {
+              GuildID: interaction.guildId,
+              ChannelID: selectedChannel.id,
+              Character: selectedCharacter,
+              MovieOrTrilogy: selectedMovorTri
+              
+          }
+      }));
+    }
+    catch (error) {
+      console.error("Error setting the channel:", error);
+      throw error;
+    }
+
+    await interaction.reply({ 
+        content: `Auto-post channel has been successfully set to ${selectedChannel}!`, 
+        ephemeral: true // Only visible to the user who ran it
+    });
+    
   }
 
   if (commandName === 'prequelsmemes' || 

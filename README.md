@@ -1,4 +1,4 @@
-# StarWarsQuote-Bot v5.0.0
+# StarWarsQuote-Bot v5.1.0
 ## Description:
 Discord Bot that generates quotes and memes from Star Wars from a database of around 3000 quotes with over 174 Characters to choose from along with complementary GIFs.
 
@@ -19,7 +19,10 @@ Discord Bot that generates quotes and memes from Star Wars from a database of ar
 3.0.1 : Updated gif links due to Gfycat being discontinued <br>
 4.0.0 : Added the Last Jedi and The Rise of Skywalker quotes with updated gifs and actor pictures <br>
 4.1.0 : Update Dependencies <br>
-5.0.0 : Added /searchquote command
+5.0.0 : Added /searchquote command <br>
+5.1.0 : Added /setautopostchannel
+- Restricted to admins/mod and text channels only
+- Auto posts at 12pm
 
 ## Dependencies:
 * __node.js__ version 12+

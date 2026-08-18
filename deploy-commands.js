@@ -1,5 +1,5 @@
 
-const { SlashCommandBuilder, REST, Routes } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, REST, Routes } = require('discord.js');
 const dataDoc = require('./QuoteData.js')
 
 const formatChoices = (memeArray) => {
@@ -8,6 +8,44 @@ const formatChoices = (memeArray) => {
 };
 
 const commands = [
+
+  new SlashCommandBuilder() // setautopostchannel
+    .setName('setautopostchannel')
+    .setDescription('Set a channel to auto post random quotes')
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels) //Restrict to admins/mods
+    .addChannelOption(option =>
+      option.setName('target-channel')
+          .setDescription('The channel for auto-posting')
+          .setRequired(true)
+          .addChannelTypes(ChannelType.GuildText) // Restrict to text channels only
+    )
+    .addStringOption(option =>
+      option.setName('character')
+        .setDescription('A Random Quote by Character')
+        .setRequired(false)
+        .setAutocomplete(true)
+    )
+
+    .addStringOption(option =>
+      option.setName('movieortrilogy')
+        .setDescription('A Random Quote by Movie or Trilogy')
+        .setRequired(false)
+        .addChoices(
+          { name: 'Star Wars: Episode I – The Phantom Menace (1999)', value: '1' },
+          { name: 'Star Wars: Episode II – Attack of the Clones (2002)', value: '2' },
+          { name: 'Star Wars: Episode III – Revenge of the Sith (2005)', value: '3' },
+          { name: 'Star Wars: Episode IV – A New Hope (1977)', value: '4' },
+          { name: 'Star Wars: Episode V – The Empire Strikes Back (1980)', value: '5' },
+          { name: 'Star Wars: Episode VI – Return of the Jedi (1983)', value: '6' },
+          { name: 'Star Wars: Episode VII – The Force Awakens (2015)', value: '7' },
+          { name: 'Star Wars: Episode VIII – The Last Jedi (2017)', value: '8' },
+          { name: 'Star Wars: Episode IX – The Rise of Skywalker (2019)', value: '9' },
+          { name: 'Prequels', value: 'T1' },
+          { name: 'Original Trilogy', value: 'T2' },
+          { name: 'Sequels', value: 'T3' },
+          { name: 'PreDisney Era', value: 'N' }
+        )
+    ),
   new SlashCommandBuilder()
   .setName('searchquote')
     .setDescription('Find your quote from Star Wars')
