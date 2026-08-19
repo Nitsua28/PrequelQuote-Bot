@@ -266,7 +266,7 @@ client.on('ready', () => {
     logger_1.logger.debug(`Bot Ready and logged in as ${client.user.tag}!`);
     console.log('Bot Online');
 });
-scheduleDailyPosts(12, 0); // for noon everyday
+scheduleDailyPosts(19, 0); // for noon everyday at UTC time (for Heroku uses UTC)
 client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     const charChoices = [];
     Array.from(dataDoc.characters.keys()).forEach((item) => charChoices.push(item));

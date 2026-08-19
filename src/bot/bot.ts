@@ -297,7 +297,7 @@ client.on('ready', () => {
   console.log('Bot Online')
 })
 
-scheduleDailyPosts(12,0) // for noon everyday
+scheduleDailyPosts(19,0) // for noon everyday at UTC time (for Heroku uses UTC)
 
 client.on('interactionCreate', async (interaction: any) => {
   const charChoices: any [] = [];
