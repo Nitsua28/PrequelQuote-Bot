@@ -277,7 +277,7 @@ async function scheduleDailyPosts(targetHour: any, targetMinute = 0) {
 
     }, timeUntilFirstRun);
 }
-
+// Test comment
 const docClient = new DynamoDBClient({
   credentials: { //! to ignore undefined
       accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
