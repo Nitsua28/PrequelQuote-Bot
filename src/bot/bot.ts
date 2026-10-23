@@ -136,7 +136,17 @@ async function randomQuotesForSchedule(){
     }
 
   for (const item of allGuildInfo){
-    const channel = await client.channels.fetch(item.ChannelID);
+    let channel = null;
+    try {
+      channel = await client.channels.fetch(item.ChannelID);
+    } catch (error) {
+      console.log("Error: " + error)
+      const logChannel = await client.channels.fetch("1563272749030318140");
+      if (logChannel) {
+            await logChannel.send(`⚠️ **Error fetching channel** \`${item.ChannelID}\`:\n\`\`\`js\n${error}\n\`\`\``);
+        }
+    }
+    
     const movieOrTrilogy = item.MovieOrTrilogy
     const actor = item.Character
 

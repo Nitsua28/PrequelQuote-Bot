@@ -122,7 +122,17 @@ function randomQuotesForSchedule() {
             throw error;
         }
         for (const item of allGuildInfo) {
-            const channel = yield client.channels.fetch(item.ChannelID);
+            let channel = null;
+            try {
+                channel = yield client.channels.fetch(item.ChannelID);
+            }
+            catch (error) {
+                console.log("Error: " + error);
+                const logChannel = yield client.channels.fetch("1563272749030318140");
+                if (logChannel) {
+                    yield logChannel.send(`⚠️ **Error fetching channel** \`${item.ChannelID}\`:\n\`\`\`js\n${error}\n\`\`\``);
+                }
+            }
             const movieOrTrilogy = item.MovieOrTrilogy;
             const actor = item.Character;
             const paramsScan = {
@@ -250,6 +260,7 @@ function scheduleDailyPosts(targetHour_1) {
         }, timeUntilFirstRun);
     });
 }
+// Test comment
 const docClient = new client_dynamodb_1.DynamoDBClient({
     credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
